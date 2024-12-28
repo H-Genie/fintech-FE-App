@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@shadcn": path.resolve(__dirname, "./src/shadcn"),
+      "@assets": path.resolve(__dirname, "./src/assets"),
     },
   },
 });
