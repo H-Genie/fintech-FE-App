@@ -25,7 +25,8 @@
     "baseUrl": ".",
     "paths": {
       "@shadcn/*": ["./src/shadcn/*"],
-      "@assets/*": ["./src/assets/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@mock/*": ["./src/mock/*"]
     }
   },
   "include": ["src"]
