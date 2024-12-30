@@ -9,7 +9,7 @@
     "paths": {
       "@shadcn/*": ["./src/shadcn/*"],
       "@assets/*": ["./src/assets/*"],
-      "@mock/*": ["./src/mock/*"]
+      "@mocks/*": ["src/mocks/*"]
     }
   }
 }
