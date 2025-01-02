@@ -8,7 +8,7 @@ export default defineConfig({
     alias: {
       "@shadcn": path.resolve(__dirname, "./src/shadcn"),
       "@assets": path.resolve(__dirname, "./src/assets"),
-      "@mocks": path.resolve(__dirname, "./src/mock"),
+      "@mocks": path.resolve(__dirname, "./src/mocks"),
     },
   },
   define: {
