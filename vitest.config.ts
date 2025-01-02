@@ -1,13 +1,13 @@
-import { defineConfig } from "vitest/config";
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
     globals: true, // Jest 스타일 글로벌 API 사용 가능
-    environment: "jsdom", // 브라우저 환경을 시뮬레이션
-    setupFiles: "./src/setupTests.ts", // 테스트 초기화 파일
+    environment: 'jsdom', // 브라우저 환경을 시뮬레이션
+    setupFiles: './src/setupTests.ts', // 테스트 초기화 파일
     coverage: {
-      provider: "v8", // 코드 커버리지
-      reporter: ["text", "json", "html"], // 커버리지 리포트 형식
+      provider: 'v8', // 코드 커버리지
+      reporter: ['text', 'json', 'html'], // 커버리지 리포트 형식
     },
   },
 });
