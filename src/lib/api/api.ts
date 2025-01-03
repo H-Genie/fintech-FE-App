@@ -1,6 +1,12 @@
 import { API_BASE_URL } from '@app/config';
 import ky, { HTTPError, type Options } from 'ky';
 
+type ApiResponse<T> = {
+  code: string;
+  data: T;
+  message?: string;
+};
+
 /**
  * API 클라이언트 생성
  * @description ky를 사용하여 기본 클라이언트를 설정합니다.
@@ -50,11 +56,11 @@ export const api = {
    * @template T - 응답 데이터 타입
    * @param {string} url - API 엔드포인트
    * @param {Options} [options] - 요청 옵션
-   * @returns {Promise<T>} - 응답 데이터의 Promise
+   * @returns {Promise<ApiResponse<T>>} - 응답 데이터의 Promise
    */
-  get: async <T>(url: string, options?: Options): Promise<T> => {
+  get: async <T>(url: string, options?: Options): Promise<ApiResponse<T>> => {
     try {
-      return await httpClient.get(url, options).json<T>();
+      return await httpClient.get(url, options).json<ApiResponse<T>>();
     } catch (error) {
       return handleError(error);
     }
@@ -67,11 +73,17 @@ export const api = {
    * @param {string} url - API 엔드포인트
    * @param {R} body - 요청 바디
    * @param {Options} [options] - 요청 옵션
-   * @returns {Promise<T>} - 응답 데이터의 Promise
+   * @returns {Promise<ApiResponse<T>>} - 응답 데이터의 Promise
    */
-  post: async <T, R>(url: string, body: R, options?: Options): Promise<T> => {
+  post: async <T, R>(
+    url: string,
+    body: R,
+    options?: Options,
+  ): Promise<ApiResponse<T>> => {
     try {
-      return await httpClient.post(url, { json: body, ...options }).json<T>();
+      return await httpClient
+        .post(url, { json: body, ...options })
+        .json<ApiResponse<T>>();
     } catch (error) {
       return handleError(error);
     }
@@ -84,11 +96,17 @@ export const api = {
    * @param {string} url - API 엔드포인트
    * @param {R} body - 요청 바디
    * @param {Options} [options] - 요청 옵션
-   * @returns {Promise<T>} - 응답 데이터의 Promise
+   * @returns {Promise<ApiResponse<T>>} - 응답 데이터의 Promise
    */
-  put: async <T, R>(url: string, body: R, options?: Options): Promise<T> => {
+  put: async <T, R>(
+    url: string,
+    body: R,
+    options?: Options,
+  ): Promise<ApiResponse<T>> => {
     try {
-      return await httpClient.put(url, { json: body, ...options }).json<T>();
+      return await httpClient
+        .put(url, { json: body, ...options })
+        .json<ApiResponse<T>>();
     } catch (error) {
       return handleError(error);
     }
@@ -99,11 +117,14 @@ export const api = {
    * @template T - 응답 데이터 타입
    * @param {string} url - API 엔드포인트
    * @param {Options} [options] - 요청 옵션
-   * @returns {Promise<T>} - 응답 데이터의 Promise
+   * @returns {Promise<ApiResponse<T>>} - 응답 데이터의 Promise
    */
-  delete: async <T>(url: string, options?: Options): Promise<T> => {
+  delete: async <T>(
+    url: string,
+    options?: Options,
+  ): Promise<ApiResponse<T>> => {
     try {
-      return await httpClient.delete(url, options).json<T>();
+      return await httpClient.delete(url, options).json<ApiResponse<T>>();
     } catch (error) {
       return handleError(error);
     }
