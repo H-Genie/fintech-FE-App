@@ -1,12 +1,12 @@
 import { create } from 'zustand';
 
-type TModal = {
+export type TModal = {
   id: string; // 고유 ID
   isOpen: boolean;
   /**
    * 모달에 렌더링할 React 요소
    */
-  children: React.ReactNode;
+  children: React.ReactElement;
   /**
    * 오버레이 사용 여부
    */
@@ -24,7 +24,7 @@ type TModal = {
 export type TModalState = {
   modals: TModal[];
   openModal: (
-    children: React.ReactNode,
+    children: React.ReactElement,
     options?: Partial<Omit<TModal, 'id' | 'isOpen' | 'children'>>,
   ) => void;
   closeModal: () => void; // 배열의 마지막 모달 닫기
