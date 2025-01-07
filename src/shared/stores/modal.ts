@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-interface Modal {
+type TModal = {
   id: string; // 고유 ID
   isOpen: boolean;
   /**
@@ -19,19 +19,19 @@ interface Modal {
    * 오버레이 클릭으로 닫기 허용 여부
    */
   allowOverlayClickClose?: boolean;
-}
+};
 
-interface ModalState {
-  modals: Modal[];
+export type TModalState = {
+  modals: TModal[];
   openModal: (
     children: React.ReactNode,
-    options?: Partial<Omit<Modal, 'id' | 'isOpen' | 'children'>>,
+    options?: Partial<Omit<TModal, 'id' | 'isOpen' | 'children'>>,
   ) => void;
   closeModal: () => void; // 배열의 마지막 모달 닫기
   closeAllModal: () => void; // 모든 모달 닫기
-}
+};
 
-export const useModal = create<ModalState>((set) => ({
+export const useModal = create<TModalState>((set) => ({
   modals: [],
 
   // 모달 열기
