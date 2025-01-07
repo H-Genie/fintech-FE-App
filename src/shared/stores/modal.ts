@@ -31,7 +31,7 @@ export type TModalState = {
   closeAllModal: () => void; // 모든 모달 닫기
 };
 
-export const modalState = create<TModalState>((set) => ({
+export const useModalStore = create<TModalState>((set) => ({
   modals: [],
 
   // 모달 열기
