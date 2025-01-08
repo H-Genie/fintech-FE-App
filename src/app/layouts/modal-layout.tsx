@@ -1,9 +1,9 @@
-import useModal from '@shared/hooks/useModal';
+import { useModalStore } from '@shared/stores/modal';
 import { cloneElement } from 'react';
 import { Fragment } from 'react/jsx-runtime';
 
 const ModalLayout = () => {
-  const { modals } = useModal();
+  const { modals } = useModalStore();
   return modals.map((modal) => {
     return (
       <Fragment key={modal.id}>
