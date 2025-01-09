@@ -4,12 +4,24 @@
 
 /* 모바일 뷰포트 높이 대응 */
 @supports (-webkit-touch-callout: none) {
-    .min-h-screen {
-      min-height: -webkit-fill-available;
-    }
+  .min-h-screen {
+    min-height: -webkit-fill-available;
   }
-  
-  /* 모바일 홈바 안전 영역 대응 */
-  .safe-area-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 모바일 홈바 안전 영역 대응 */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+@layer base {
+  body:has([data-enable-background-scroll='true']) {
+    overflow: auto;
   }
+}
+
+@layer base {
+  body:has([data-enable-background-scroll='false']) {
+    overflow: hidden;
+  }
+}
