@@ -1,6 +1,7 @@
 import useModal from '@shared/hooks/useModal';
 import { useModalStore, type TModal } from '@shared/stores/modal';
 import { AnimatePresence, motion } from 'motion/react';
+import { Button } from '../shadcn/components/ui/button';
 
 export type TDialogType = 'alert' | 'confirm';
 export type TDialogConfig = {
@@ -50,19 +51,26 @@ const DialogWrapper = ({ modal, config }: DialogWrapperProps) => {
                 modal?.enableOverlayClickClose ? closeModal() : null
               }
             />
-            <div className='relative z-1 bg-white'>
-              <div>{title}</div>
-              <div>{description}</div>
-              <div>
+            <div className='relative z-1 flex flex-col gap-2  rounded-[12px] py-4 bg-white w-[320px]'>
+              <div className='font-bold px-4'>{title}</div>
+              <div className='px-4 pb-4'>{description}</div>
+              <div className='flex justify-end gap-2 px-4 '>
                 {type === 'confirm' && (
-                  <button onClick={() => (cancel ? cancel() : closeModal())}>
+                  <Button
+                    variant={'outline'}
+                    size={'sm'}
+                    onClick={() => (cancel ? cancel() : closeModal())}
+                  >
                     {cancelmButtonText ?? '취소'}
-                  </button>
+                  </Button>
                 )}
 
-                <button onClick={() => (confirm ? confirm() : closeModal())}>
+                <Button
+                  size={'sm'}
+                  onClick={() => (confirm ? confirm() : closeModal())}
+                >
                   {confirmButtonText ?? '확인'}
-                </button>
+                </Button>
               </div>
             </div>
           </motion.div>
