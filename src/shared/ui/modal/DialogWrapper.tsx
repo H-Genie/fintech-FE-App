@@ -2,7 +2,8 @@ import useModal from '@shared/hooks/useModal';
 import { useModalStore, type TModal } from '@shared/stores/modal';
 import { AnimatePresence, motion } from 'motion/react';
 
-export type TDialog = {
+export type TDialogType = 'alert' | 'confirm';
+export type TDialogConfig = {
   title: React.ReactNode;
   description: React.ReactNode;
   confirm?: VoidFunction;
@@ -10,12 +11,14 @@ export type TDialog = {
   confirmButtonText?: string;
   cancelmButtonText?: string;
 };
+export type TDialog = { type: TDialogType } & TDialogConfig;
 interface DialogWrapperProps {
   modal?: TModal;
   config: TDialog;
 }
 const DialogWrapper = ({ modal, config }: DialogWrapperProps) => {
   const {
+    type,
     title,
     description,
     confirm,
@@ -51,7 +54,7 @@ const DialogWrapper = ({ modal, config }: DialogWrapperProps) => {
               <div>{title}</div>
               <div>{description}</div>
               <div>
-                {cancel && (
+                {type === 'confirm' && (
                   <button onClick={() => (cancel ? cancel() : closeModal())}>
                     {cancelmButtonText ?? '취소'}
                   </button>

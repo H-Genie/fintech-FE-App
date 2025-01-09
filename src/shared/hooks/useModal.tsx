@@ -20,6 +20,7 @@ const useModal = () => {
   };
 
   const openDialog = ({
+    type,
     title,
     description,
     confirm,
@@ -28,6 +29,7 @@ const useModal = () => {
     cancelmButtonText,
   }: TDialog) => {
     const config: TDialog = {
+      type,
       title,
       description,
       confirm,
