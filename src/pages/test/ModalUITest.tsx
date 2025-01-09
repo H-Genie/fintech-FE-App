@@ -139,7 +139,7 @@ const ModalUITest = () => {
               <tbody>
                 {모달_옵션_테이블.map((data) => {
                   return (
-                    <tr>
+                    <tr key={data.key}>
                       <td className={`${BorderStyle} h-[32px] px-2`}>
                         {data.key}
                       </td>
@@ -311,7 +311,7 @@ const ModalUITest = () => {
               <tbody>
                 {다이얼로그_옵션_테이블.map((data) => {
                   return (
-                    <tr>
+                    <tr key={data.key}>
                       <td className={`${BorderStyle} h-[32px] px-2`}>
                         {data.key} {data.required && <RequiredMark />}
                       </td>
