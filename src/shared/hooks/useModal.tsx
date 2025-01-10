@@ -6,7 +6,6 @@ import DialogWrapper, {
 } from '@shared/ui/modal/DialogWrapper';
 import ModalWrapper from '@shared/ui/modal/ModalWrapper';
 
-//래핑 훅. 추가 로직이 필요할지도..?
 const useModal = () => {
   const {
     openModal: open,
