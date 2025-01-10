@@ -86,6 +86,22 @@ const ModalUITest = () => {
       confirm: closeAllModal,
     });
   };
+
+  const 다이얼_테스트_함수3 = () => {
+    openDialog('alert', {
+      title: 'TITLE',
+      description: '이 다이얼로그는 Alert입니다',
+      confirm: closeModal,
+    });
+  };
+
+  const 다이얼_테스트_함수4 = () => {
+    openDialog('confirm', {
+      title: 'TITLE',
+      description: '이 다이얼로그는 Confirm입니다',
+      confirm: closeModal,
+    });
+  };
   const 모달_테스트_함수 = (
     callback?: VoidFunction,
     options?: TModalOptions,
@@ -343,12 +359,27 @@ const ModalUITest = () => {
           <ul className='flex flex-col gap-4 list-decimal pl-4'>
             <li>
               <div className='flex items-center gap-4'>
-                <Button size={'sm'} onClick={다이얼_테스트_함수1}>
-                  Dialog Open
+                <Button size={'sm'} onClick={다이얼_테스트_함수3}>
+                  Alert Open
                 </Button>
                 <p>
                   단일 다이얼로그 테스트,{' '}
-                  <strong>다이얼로그가 정상적으로 화면에 렌더된다</strong>
+                  <strong>
+                    다이얼로그(Alert)가 정상적으로 화면에 렌더된다
+                  </strong>
+                </p>
+              </div>
+            </li>
+            <li>
+              <div className='flex items-center gap-4'>
+                <Button size={'sm'} onClick={다이얼_테스트_함수4}>
+                  Confirm Open
+                </Button>
+                <p>
+                  단일 다이얼로그 테스트,{' '}
+                  <strong>
+                    다이얼로그(Confirm)가 정상적으로 화면에 렌더된다
+                  </strong>
                 </p>
               </div>
             </li>
