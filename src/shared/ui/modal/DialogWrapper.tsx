@@ -51,7 +51,7 @@ const DialogWrapper = ({ modal, config }: DialogWrapperProps) => {
                 modal?.enableOverlayClickClose ? closeModal() : null
               }
             />
-            <div className='relative z-1 flex flex-col gap-2  rounded-[12px] py-4 bg-white w-[320px]'>
+            <div className='relative flex flex-col gap-2  rounded-[12px] py-4 bg-white w-[320px]'>
               <div className='font-bold px-4'>{title}</div>
               <div className='px-4 pb-4'>{description}</div>
               <div className='flex justify-end gap-2 px-4 '>
