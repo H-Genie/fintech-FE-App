@@ -30,7 +30,7 @@ const useModal = () => {
     open('dialog', <DialogWrapper config={_config} />, {
       enableOverlay: true,
       enableOverlayClickClose: false,
-      enableBackgroundScroll: true,
+      enableBackgroundScroll: false,
     });
   };
   return { openModal, openDialog, closeModal, closeAllModal, cleanupModals };
