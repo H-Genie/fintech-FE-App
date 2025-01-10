@@ -50,7 +50,7 @@ export const useModalStore = create<TModalState>((set) => ({
         ...state.modals,
         {
           id: crypto.randomUUID(), // 고유 ID 생성
-          index: useModalStore.getState().modals.length,
+          index: state.modals.length,
           isVisible: true,
           type,
           children,
