@@ -2,7 +2,7 @@ import { useModalStore } from '@shared/stores/modal';
 import { cloneElement } from 'react';
 import { Fragment } from 'react/jsx-runtime';
 
-const ModalLayout = () => {
+const ModalProvider = () => {
   const { modals } = useModalStore();
   return modals.map((modal) => {
     return (
@@ -13,4 +13,4 @@ const ModalLayout = () => {
   });
 };
 
-export default ModalLayout;
+export default ModalProvider;
