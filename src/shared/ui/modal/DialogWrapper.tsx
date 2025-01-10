@@ -10,7 +10,7 @@ export type TDialogConfig = {
   confirm?: VoidFunction;
   cancel?: VoidFunction;
   confirmButtonText?: string;
-  cancelmButtonText?: string;
+  cancelButtonText?: string;
 };
 export type TDialog = { type: TDialogType } & TDialogConfig;
 interface DialogWrapperProps {
@@ -25,7 +25,7 @@ const DialogWrapper = ({ modal, config }: DialogWrapperProps) => {
     confirm,
     cancel,
     confirmButtonText,
-    cancelmButtonText,
+    cancelButtonText,
   } = config;
   const { closeModal, cleanupModals } = useModal();
   return (
@@ -61,7 +61,7 @@ const DialogWrapper = ({ modal, config }: DialogWrapperProps) => {
                     size={'sm'}
                     onClick={() => (cancel ? cancel() : closeModal())}
                   >
-                    {cancelmButtonText ?? '취소'}
+                    {cancelButtonText ?? '취소'}
                   </Button>
                 )}
 
