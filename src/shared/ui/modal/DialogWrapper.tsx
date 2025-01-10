@@ -38,6 +38,7 @@ const DialogWrapper = ({ modal, config }: DialogWrapperProps) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
             className='flex items-center justify-center fixed inset-0 z-[10000]'
+            data-enable-background-scroll={modal.enableBackgroundScroll}
             onAnimationComplete={() => {
               // 닫힌 모달이 있으면 정리
               if (useModalStore.getState().modals.some((m) => !m.isVisible)) {
