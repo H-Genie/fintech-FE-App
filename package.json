@@ -9,9 +9,20 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.1.1",
     "@tanstack/react-query": "^5.62.11",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -37,6 +48,8 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.3.0",
     "msw": "^2.7.0",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
