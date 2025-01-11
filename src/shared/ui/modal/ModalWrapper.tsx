@@ -1,14 +1,18 @@
-import useModal from '@shared/hooks/useModal';
 import { useModalStore, type TModal } from '@shared/stores/modal';
 import { AnimatePresence, motion } from 'motion/react';
 
 interface ModalProps {
   modal?: TModal;
   children: React.ReactNode;
+  closeModal: VoidFunction;
+  cleanupModals: VoidFunction;
 }
-const ModalWrapper = ({ modal, children }: ModalProps) => {
-  const { closeModal, cleanupModals } = useModal();
-
+const ModalWrapper = ({
+  modal,
+  children,
+  closeModal,
+  cleanupModals,
+}: ModalProps) => {
   return (
     <AnimatePresence>
       {modal?.isVisible && (

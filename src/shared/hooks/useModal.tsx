@@ -15,11 +15,17 @@ const useModal = () => {
   } = useModalStore();
 
   const openModal = (children: React.ReactElement, options?: TModalOptions) => {
-    open('modal', <ModalWrapper>{children}</ModalWrapper>, {
-      enableOverlay: options?.enableOverlay ?? true,
-      enableOverlayClickClose: options?.enableOverlayClickClose ?? true,
-      enableBackgroundScroll: options?.enableBackgroundScroll ?? false,
-    });
+    open(
+      'modal',
+      <ModalWrapper closeModal={closeModal} cleanupModals={cleanupModals}>
+        {children}
+      </ModalWrapper>,
+      {
+        enableOverlay: options?.enableOverlay ?? true,
+        enableOverlayClickClose: options?.enableOverlayClickClose ?? true,
+        enableBackgroundScroll: options?.enableBackgroundScroll ?? false,
+      },
+    );
   };
 
   const openDialog = (type: TDialogType, config: TDialogConfig) => {
@@ -27,11 +33,19 @@ const useModal = () => {
       type,
       ...config,
     };
-    open('dialog', <DialogWrapper config={_config} />, {
-      enableOverlay: true,
-      enableOverlayClickClose: false,
-      enableBackgroundScroll: false,
-    });
+    open(
+      'dialog',
+      <DialogWrapper
+        config={_config}
+        closeModal={closeModal}
+        cleanupModals={cleanupModals}
+      />,
+      {
+        enableOverlay: true,
+        enableOverlayClickClose: false,
+        enableBackgroundScroll: false,
+      },
+    );
   };
   return { openModal, openDialog, closeModal, closeAllModal, cleanupModals };
 };

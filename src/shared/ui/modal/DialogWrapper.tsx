@@ -1,4 +1,3 @@
-import useModal from '@shared/hooks/useModal';
 import { useModalStore, type TModal } from '@shared/stores/modal';
 import { AnimatePresence, motion } from 'motion/react';
 import { Button } from '../shadcn/components/ui/button';
@@ -16,8 +15,15 @@ export type TDialog = { type: TDialogType } & TDialogConfig;
 interface DialogWrapperProps {
   modal?: TModal;
   config: TDialog;
+  closeModal: VoidFunction;
+  cleanupModals: VoidFunction;
 }
-const DialogWrapper = ({ modal, config }: DialogWrapperProps) => {
+const DialogWrapper = ({
+  modal,
+  config,
+  closeModal,
+  cleanupModals,
+}: DialogWrapperProps) => {
   const {
     type,
     title,
@@ -27,7 +33,6 @@ const DialogWrapper = ({ modal, config }: DialogWrapperProps) => {
     confirmButtonText,
     cancelButtonText,
   } = config;
-  const { closeModal, cleanupModals } = useModal();
   return (
     <div className=''>
       <AnimatePresence>
