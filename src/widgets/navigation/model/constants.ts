@@ -1,30 +1,24 @@
-import { House, CircleDollarSign, CreditCard, CircleUserRound } from 'lucide-react';
+import { List, Camera, CreditCard } from 'lucide-react';
 import type { NavItem } from './types';
 import { ROUTES } from '@shared/config/routes';
 
 export const NAVIGATION_ITEMS: NavItem[] = [
   {
-    id: 'home',
-    label: '홈',
-    icon: House,
-    path: ROUTES.APP.HOME,
-  },
-  {
-    id: 'scan',
-    label: 'QR스캔',
-    icon: CircleDollarSign,
-    path: ROUTES.APP.SCAN,
-  },
-  {
-    id: 'payments',
+    id: 'payment',
     label: '결제내역',
-    icon: CreditCard,
-    path: ROUTES.APP.PAYMENTS,
+    icon: List,
+    path: ROUTES.PAYMENT_MANAGEMENT,
   },
   {
-    id: 'profile',
-    label: '내정보',
-    icon: CircleUserRound,
-    path: ROUTES.APP.PROFILE,
+    id: 'qr-payment',
+    label: 'QR 결제',
+    icon: Camera,
+    path: ROUTES.QR_PAYMENT,
+  },
+  {
+    id: 'card',
+    label: '카드',
+    icon: CreditCard,
+    path: ROUTES.CARD_MANAGEMENT,
   },
 ] as const;
