@@ -5,7 +5,7 @@ export const LoginPage = () => {
     e.preventDefault();
   };
   return (
-    <div className='h-screen flex flex-col items-center justify-center'>
+    <div className='h-screen flex flex-col items-center justify-center -m-8'>
       <img src='/logo.png' className='w-24' alt='Logo' />
       <form className='w-[356px] flex flex-col' onSubmit={onSubmit}>
         <div className='pt-16' />
