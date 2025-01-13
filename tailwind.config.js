@@ -14,7 +14,10 @@ export default {
         muted: {
           foreground: '#6B7280',
           background: '#F3F4F6',
-        }
+        },
+      },
+      fontFamily: {
+        sans: ['Pretendard', 'Arial', 'sans-serif'],
       },
     },
   },
