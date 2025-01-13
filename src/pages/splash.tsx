@@ -6,7 +6,7 @@ export const SplashPage = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate('/basic/login');
+      navigate('/login');
     }, 1000);
 
     return () => clearTimeout(timer);
