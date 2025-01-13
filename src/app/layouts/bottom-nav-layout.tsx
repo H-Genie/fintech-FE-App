@@ -1,13 +1,13 @@
 import { Outlet } from 'react-router-dom';
 import { BottomNavigation } from '@widgets/navigation';
 
-export const AppLayout = () => {
+export const BottomNavLayout = () => {
   return (
-    <div className="min-h-screen">
-      <main className="container">
+    <div className='min-h-screen'>
+      <main className='container'>
         <Outlet />
       </main>
       <BottomNavigation />
     </div>
   );
-}; 
+};
