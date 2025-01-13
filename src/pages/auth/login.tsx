@@ -21,10 +21,7 @@ export const LoginPage = () => {
         />
         <div className='pt-4' />
         <p className='text-center'>
-          <Link
-            to='/app/signup'
-            className='hover:underline hover:text-blue-500'
-          >
+          <Link to='/signup' className='hover:underline hover:text-blue-500'>
             아직 회원이 아닌가요?
           </Link>
         </p>

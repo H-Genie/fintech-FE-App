@@ -11,6 +11,9 @@ export const NavigationItem = ({ item, isActive }: NavItemProps) => {
         'transition-colors duration-200',
         'active:opacity-70',
         isActive ? 'text-primary' : 'text-muted-foreground hover:text-primary',
+        item.id === 'qr-payment'
+          ? 'text-white bg-[#1293FB] rounded-full w-[72px] h-[72px] absolute -top-5'
+          : '',
       )}
     >
       <item.icon className='w-5 h-5' />
