@@ -1,5 +1,7 @@
+import Undeveloped from '@shared/ui/Undeveloped';
+
 const CardPage = () => {
-  return <h1 className='text-2xl'>Card Page</h1>;
+  return <Undeveloped />;
 };
 
 export default CardPage;

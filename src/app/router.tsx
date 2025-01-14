@@ -18,6 +18,9 @@ const SignupPage = lazy(() =>
 const PaymentPage = lazy(() =>
   import('@pages/payment/main').then((m) => ({ default: m.default })),
 );
+const PaymentDetailPage = lazy(() =>
+  import('@pages/payment/detail').then((m) => ({ default: m.default })),
+);
 const QRPage = lazy(() =>
   import('@pages/qr/main').then((m) => ({ default: m.default })),
 );
@@ -38,6 +41,7 @@ const SuspendedLoginPage = withSuspense(LoginPage);
 const SuspendedSignupPage = withSuspense(SignupPage);
 const SuspendedQRPage = withSuspense(QRPage);
 const SuspendedPaymentPage = withSuspense(PaymentPage);
+const SuspendedPaymentDetailPage = withSuspense(PaymentDetailPage);
 const SuspendedCardPage = withSuspense(CardPage);
 const SuspendedQRScanPage = withSuspense(QRScanPage);
 const SuspendedQRPaymentDetailPage = withSuspense(QRPaymentDetailPage);
@@ -60,7 +64,6 @@ const routes = {
           path: ROUTES.QR.COMPLETE,
           element: <SuspendedQRPaymentCompletePage />,
         },
-        { path: ROUTES.PAYMENT.DETAIL, element: <SuspendedPaymentPage /> },
       ],
     },
 
@@ -69,6 +72,10 @@ const routes = {
       element: <BottomNavLayout />,
       children: [
         { path: ROUTES.PAYMENT.MAIN, element: <SuspendedPaymentPage /> },
+        {
+          path: ROUTES.PAYMENT.DETAIL,
+          element: <SuspendedPaymentDetailPage />,
+        },
         { path: ROUTES.QR.MAIN, element: <SuspendedQRPage /> },
         { path: ROUTES.CARD.MAIN, element: <SuspendedCardPage /> },
       ],
