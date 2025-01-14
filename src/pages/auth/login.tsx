@@ -1,34 +1,55 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export const LoginPage = () => {
+  const [isShow, setIsShow] = useState<boolean>(false);
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
+
   return (
     <div className='h-screen flex flex-col items-center justify-center -m-8'>
       <img src='/logo.png' className='w-24' alt='Logo' />
+
       <form className='w-[356px] flex flex-col' onSubmit={onSubmit}>
         <div className='pt-16' />
+
         <input
+          type='email'
           placeholder='Email'
-          className='bg-[#f6f6f6] border border-[#e8e8e8] outline-none h-12 rounded-[0.5rem] pl-4'
+          className='bg-[#f6f6f6] border border-[#e8e8e8] outline-none h-12 rounded-md pl-4'
         />
-        <div className='pt-4' />
-        <input
-          type='password'
-          placeholder='Password'
-          className='bg-[#f6f6f6] border border-[#e8e8e8] outline-none h-12 rounded-[0.5rem] pl-4'
-        />
-        <div className='pt-4' />
+
+        <div role='separator' className='pt-4' />
+
+        <div className='relative'>
+          <input
+            type={isShow ? 'text' : 'password'}
+            placeholder='Password'
+            className='bg-[#f6f6f6] border border-[#e8e8e8] outline-none h-12 rounded-md pl-4 w-full'
+          />
+          <span
+            className='absolute right-2 top-1/2 transform -translate-y-1/2 text-[#18a0fb] cursor-pointer'
+            onClick={() => setIsShow((prev) => !prev)}
+          >
+            {isShow ? 'Hide' : 'Show'}
+          </span>
+        </div>
+
+        <div role='separator' className='pt-4' />
+
         <p className='text-center'>
           <Link to='/signup' className='hover:underline hover:text-blue-500'>
             아직 회원이 아닌가요?
           </Link>
         </p>
-        <div className='pt-16' />
+
+        <div role='separator' className='pt-4' />
+
         <button
           type='submit'
-          className='h-12 bg-[#5DB075] border-none rounded-full text-white font-bold'
+          className='h-12 bg-[#18A0FB] border-none rounded-full text-white font-bold'
         >
           로그인
         </button>
