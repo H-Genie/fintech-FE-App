@@ -1,50 +1,87 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { lazy } from 'react';
-import App from '../App';
-import { BasicLayout } from './layouts/basic-layout';
-import { AppLayout } from './layouts/app-layout';
+import { DefaultLayout } from './layouts/default-layout';
+import { BottomNavLayout } from './layouts/bottom-nav-layout';
 import { withSuspense } from './providers/with-suspense';
 import { ROUTES } from '@shared/config/routes';
-import { SplashPage } from '@pages/basic/splash';
+import SplashPage from '@pages/splash';
+import ModalUITest from '@pages/test/ModalUITest';
+import ApiHookTest from '@pages/test/ApiHookTest';
 
 // Lazy load pages
-const LoginPage = lazy(() => import('@pages/basic/login').then(m => ({ default: m.LoginPage })));
-const HomePage = lazy(() => import('@pages/app/home').then(m => ({ default: m.HomePage })));
-const PaymentsPage = lazy(() => import('@pages/app/payments').then(m => ({ default: m.PaymentsPage })));
-const ScanPage = lazy(() => import('@pages/app/scan').then(m => ({ default: m.ScanPage })));
-const ProfilePage = lazy(() => import('@pages/app/profile').then(m => ({ default: m.ProfilePage })));
+const LoginPage = lazy(() =>
+  import('@pages/auth/login').then((m) => ({ default: m.default })),
+);
+const SignupPage = lazy(() =>
+  import('@pages/auth/signup').then((m) => ({ default: m.default })),
+);
+const PaymentPage = lazy(() =>
+  import('@pages/payment/main').then((m) => ({ default: m.default })),
+);
+const QRPage = lazy(() =>
+  import('@pages/qr/main').then((m) => ({ default: m.default })),
+);
+const CardPage = lazy(() =>
+  import('@pages/card/main').then((m) => ({ default: m.default })),
+);
+const QRScanPage = lazy(() =>
+  import('@pages/qr/scan').then((m) => ({ default: m.default })),
+);
+const QRPaymentDetailPage = lazy(() =>
+  import('@pages/qr/payment/detail').then((m) => ({ default: m.default })),
+);
+const QRPaymentCompletePage = lazy(() =>
+  import('@pages/qr/payment/complete').then((m) => ({ default: m.default })),
+);
 
-// withSuspense로 감싸기
 const SuspendedLoginPage = withSuspense(LoginPage);
-const SuspendedHomePage = withSuspense(HomePage);
-const SuspendedPaymentsPage = withSuspense(PaymentsPage);
-const SuspendedScanPage = withSuspense(ScanPage);
-const SuspendedProfilePage = withSuspense(ProfilePage);
+const SuspendedSignupPage = withSuspense(SignupPage);
+const SuspendedQRPage = withSuspense(QRPage);
+const SuspendedPaymentPage = withSuspense(PaymentPage);
+const SuspendedCardPage = withSuspense(CardPage);
+const SuspendedQRScanPage = withSuspense(QRScanPage);
+const SuspendedQRPaymentDetailPage = withSuspense(QRPaymentDetailPage);
+const SuspendedQRPaymentCompletePage = withSuspense(QRPaymentCompletePage);
 
 // 라우트 설정
 const routes = {
   path: '/',
-  element: <App />,
   children: [
+    // 네비게이션 없는 페이지들
     {
-      path: '/basic',
-      element: <BasicLayout />,
+      element: <DefaultLayout />,
       children: [
-        { path: ROUTES.BASIC.SPLASH, element: <SplashPage /> },
-        { path: ROUTES.BASIC.LOGIN, element: <SuspendedLoginPage /> },
-      ]
+        { index: true, element: <SplashPage /> },
+        { path: ROUTES.LOGIN, element: <SuspendedLoginPage /> },
+        { path: ROUTES.SIGNUP, element: <SuspendedSignupPage /> },
+        { path: ROUTES.QR.SCAN, element: <SuspendedQRScanPage /> },
+        { path: ROUTES.QR.DETAIL, element: <SuspendedQRPaymentDetailPage /> },
+        {
+          path: ROUTES.QR.COMPLETE,
+          element: <SuspendedQRPaymentCompletePage />,
+        },
+        { path: ROUTES.PAYMENT.DETAIL, element: <SuspendedPaymentPage /> },
+      ],
+    },
+
+    // 네비게이션 있는 페이지들
+    {
+      element: <BottomNavLayout />,
+      children: [
+        { path: ROUTES.PAYMENT.MAIN, element: <SuspendedPaymentPage /> },
+        { path: ROUTES.QR.MAIN, element: <SuspendedQRPage /> },
+        { path: ROUTES.CARD.MAIN, element: <SuspendedCardPage /> },
+      ],
     },
     {
-      path: '/app',
-      element: <AppLayout />,
-      children: [
-        { path: ROUTES.APP.HOME, element: <SuspendedHomePage /> },
-        { path: ROUTES.APP.PAYMENTS, element: <SuspendedPaymentsPage /> },
-        { path: ROUTES.APP.SCAN, element: <SuspendedScanPage /> },
-        { path: ROUTES.APP.PROFILE, element: <SuspendedProfilePage /> }
-      ]
-    }
-  ]
+      path: '/modal-test',
+      element: <ModalUITest />,
+    },
+    {
+      path: '/api-hook-test',
+      element: <ApiHookTest />,
+    },
+  ],
 };
 
 export const router = createBrowserRouter([routes]);
