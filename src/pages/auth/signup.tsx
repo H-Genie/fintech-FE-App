@@ -1,5 +1,7 @@
+import Undeveloped from '@shared/ui/Undeveloped';
+
 export const SignupPage = () => {
-  return <h1>Signup Page</h1>;
+  return <Undeveloped />;
 };
 
 export default SignupPage;

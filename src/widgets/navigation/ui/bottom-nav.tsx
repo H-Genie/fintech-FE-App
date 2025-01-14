@@ -20,7 +20,7 @@ export const BottomNavigation = ({ className }: BottomNavigationProps) => {
   return (
     <nav
       className={cn(
-        'fixed bottom-0 left-0 right-0 z-50',
+        'fixed bottom-0 left-0 right-0 z-50 bg-white',
         'border-t safe-area-bottom',
         className,
       )}
