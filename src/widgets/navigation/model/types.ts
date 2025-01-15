@@ -1,6 +1,5 @@
 import { ROUTES } from '@shared/config/routes';
-import type { FC } from 'react';
-import type { LucideProps } from 'lucide-react';
+import type { IconName } from '@shared/ui/icon/Icon';
 
 export type NavigationID = 'payment' | 'qr-payment' | 'card';
 export type NavigationPath =
@@ -11,7 +10,7 @@ export type NavigationPath =
 export interface NavItem {
   id: NavigationID;
   label: string;
-  icon: FC<LucideProps>;
+  icon: IconName;
   path: NavigationPath;
 }
 

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { cn } from '@shared/ui/shadcn/lib/utils';
 import type { NavItemProps } from '../model/types';
+import Icon from '@shared/ui/icon/Icon';
 
 export const NavigationItem = ({ item, isActive }: NavItemProps) => {
   return (
@@ -16,7 +17,7 @@ export const NavigationItem = ({ item, isActive }: NavItemProps) => {
           : '',
       )}
     >
-      <item.icon className='w-5 h-5' />
+      <Icon name={item.icon} />
       <span className='text-xs font-medium'>{item.label}</span>
     </Link>
   );
