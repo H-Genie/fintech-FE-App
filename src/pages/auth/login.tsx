@@ -1,11 +1,19 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const LoginPage = () => {
   const [isShow, setIsShow] = useState<boolean>(false);
+  const [email, setEmail] = useState<string | undefined>();
+  const [password, setPassword] = useState<string | undefined>();
+  const navigate = useNavigate();
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // TODO: 퍼블리싱 단계에서 임시로 넘어가기 위한 로직
+    if (email === 'admin@admin.com' && password === '1234') {
+      navigate('/payment');
+    }
   };
 
   return (
@@ -18,6 +26,7 @@ export const LoginPage = () => {
         <input
           type='email'
           placeholder='Email'
+          onChange={(e) => setEmail(e.target.value)}
           className='bg-[#f6f6f6] border border-[#e8e8e8] outline-none h-12 rounded-md pl-4'
         />
 
@@ -27,6 +36,7 @@ export const LoginPage = () => {
           <input
             type={isShow ? 'text' : 'password'}
             placeholder='Password'
+            onChange={(e) => setPassword(e.target.value)}
             className='bg-[#f6f6f6] border border-[#e8e8e8] outline-none h-12 rounded-md pl-4 w-full'
           />
           <span
