@@ -5,7 +5,7 @@ const PaymentPage = () => {
   return (
     <div className='p-4 pb-24'>
       <div className='w-full h-12'>
-        <div className='h-full flex justify-end items-center mr-4 cursor-pointer'>
+        <div className='h-full flex justify-end items-center mr-2 cursor-pointer'>
           <CircleUserRound size={24} color='#6B7280' />
         </div>
       </div>
