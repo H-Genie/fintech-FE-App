@@ -1,37 +1,65 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const LoginPage = () => {
+  const [isShow, setIsShow] = useState<boolean>(false);
+  const [email, setEmail] = useState<string | undefined>();
+  const [password, setPassword] = useState<string | undefined>();
+  const navigate = useNavigate();
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // TODO: 퍼블리싱 단계에서 임시로 넘어가기 위한 로직
+    if (email === 'admin@admin.com' && password === '1234') {
+      navigate('/payment');
+    }
   };
+
   return (
     <div className='h-screen flex flex-col items-center justify-center -m-8'>
       <img src='/logo.png' className='w-24' alt='Logo' />
+
       <form className='w-[356px] flex flex-col' onSubmit={onSubmit}>
         <div className='pt-16' />
+
         <input
+          type='email'
           placeholder='Email'
-          className='bg-[#f6f6f6] border border-[#e8e8e8] outline-none h-12 rounded-[0.5rem] pl-4'
+          onChange={(e) => setEmail(e.target.value)}
+          className='bg-[#f6f6f6] border border-[#e8e8e8] outline-none h-12 rounded-md pl-4'
         />
-        <div className='pt-4' />
-        <input
-          type='password'
-          placeholder='Password'
-          className='bg-[#f6f6f6] border border-[#e8e8e8] outline-none h-12 rounded-[0.5rem] pl-4'
-        />
-        <div className='pt-4' />
-        <p className='text-center'>
-          <Link
-            to='/app/signup'
-            className='hover:underline hover:text-blue-500'
+
+        <div role='separator' className='pt-4' />
+
+        <div className='relative'>
+          <input
+            type={isShow ? 'text' : 'password'}
+            placeholder='Password'
+            onChange={(e) => setPassword(e.target.value)}
+            className='bg-[#f6f6f6] border border-[#e8e8e8] outline-none h-12 rounded-md pl-4 w-full'
+          />
+          <span
+            className='absolute right-2 top-1/2 transform -translate-y-1/2 text-[#18a0fb] cursor-pointer'
+            onClick={() => setIsShow((prev) => !prev)}
           >
+            {isShow ? 'Hide' : 'Show'}
+          </span>
+        </div>
+
+        <div role='separator' className='pt-4' />
+
+        <p className='text-center'>
+          <Link to='/signup' className='hover:underline hover:text-blue-500'>
             아직 회원이 아닌가요?
           </Link>
         </p>
-        <div className='pt-16' />
+
+        <div role='separator' className='pt-4' />
+
         <button
           type='submit'
-          className='h-12 bg-[#5DB075] border-none rounded-full text-white font-bold'
+          className='h-12 bg-[#18A0FB] border-none rounded-full text-white font-bold'
         >
           로그인
         </button>

@@ -7,8 +7,8 @@ interface WithSuspenseOptions {
 }
 
 export const withSuspense = (
-  Component: React.LazyExoticComponent<ComponentType<any>>,
-  options: WithSuspenseOptions = {}
+  Component: React.LazyExoticComponent<ComponentType<unknown>>,
+  options: WithSuspenseOptions = {},
 ) => {
   return function SuspenseWrapper() {
     return (
@@ -17,4 +17,4 @@ export const withSuspense = (
       </Suspense>
     );
   };
-}; 
+};
