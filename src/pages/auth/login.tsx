@@ -1,4 +1,5 @@
 import Button from '@shared/ui/button/Button';
+import PageLayout from '@shared/ui/PageLayout';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -18,7 +19,7 @@ export const LoginPage = () => {
   };
 
   return (
-    <div className='h-screen flex flex-col items-center justify-center -m-8'>
+    <PageLayout className='flex flex-col items-center justify-center'>
       <img src='/logo.png' className='w-24' alt='Logo' />
 
       <form className='w-[356px] flex flex-col' onSubmit={onSubmit}>
@@ -67,7 +68,7 @@ export const LoginPage = () => {
           로그인
         </Button>
       </form>
-    </div>
+    </PageLayout>
   );
 };
 
