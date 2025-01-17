@@ -1,10 +1,11 @@
+import Button from '@shared/ui/button/Button';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 export const LoginPage = () => {
   const [isShow, setIsShow] = useState<boolean>(false);
-  const [email, setEmail] = useState<string | undefined>();
-  const [password, setPassword] = useState<string | undefined>();
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -57,12 +58,14 @@ export const LoginPage = () => {
 
         <div role='separator' className='pt-4' />
 
-        <button
-          type='submit'
-          className='h-12 bg-[#18A0FB] border-none rounded-full text-white font-bold'
+        <Button
+          size={'extraLarge'}
+          disabled={email.length === 0 || password.length === 0}
+          isPending={false}
+          rounded
         >
           로그인
-        </button>
+        </Button>
       </form>
     </div>
   );

@@ -7,6 +7,7 @@ import { ROUTES } from '@shared/config/routes';
 import SplashPage from '@pages/splash';
 import ModalUITest from '@pages/test/ModalUITest';
 import ApiHookTest from '@pages/test/ApiHookTest';
+import ButtonSample from '@pages/test/ButtonSample';
 
 // Lazy load pages
 const LoginPage = lazy(() =>
@@ -83,6 +84,10 @@ const routes = {
     {
       path: '/modal-test',
       element: <ModalUITest />,
+    },
+    {
+      path: '/button-test',
+      element: <ButtonSample />,
     },
     {
       path: '/api-hook-test',
