@@ -1,9 +1,10 @@
+import { cn } from '@shared/ui/shadcn/lib/utils';
 import { Outlet } from 'react-router-dom';
 
 export const DefaultLayout = () => {
   return (
-    <div className='min-h-screen'>
-      <main className='container mx-auto px-4 py-8'>
+    <div className='h-[100dvh]'>
+      <main className={cn('w-responsive_container mx-auto bg-white')}>
         <Outlet />
       </main>
     </div>

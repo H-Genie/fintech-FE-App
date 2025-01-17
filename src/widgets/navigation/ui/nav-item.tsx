@@ -13,7 +13,7 @@ export const NavigationItem = ({ item, isActive }: NavItemProps) => {
         'active:opacity-70',
         isActive ? 'text-primary' : 'text-muted-foreground hover:text-primary',
         item.id === 'qr-payment'
-          ? 'text-white bg-[#1293FB] rounded-full w-[72px] h-[72px] absolute -top-5'
+          ? 'text-white bg-[#1293FB] h-na rounded-full w-[72px] h-[72px] absolute bottom-0 translate-y-[calc(-50%+8px)]'
           : '',
       )}
     >

@@ -1,4 +1,5 @@
-import { CircleCheck, CircleX } from 'lucide-react';
+import Icon from '@shared/ui/icon/Icon';
+import PageLayout from '@shared/ui/PageLayout';
 import { useMemo } from 'react';
 
 type PaymentStatus = 'success' | 'canceled';
@@ -8,13 +9,13 @@ export const PaymentDetailPage = () => {
   const status = useMemo<PaymentStatus>(() => 'canceled', []);
 
   return (
-    <div className='w-full h-[calc(100vh-64px)] px-4 flex flex-col justify-center'>
+    <PageLayout hasNav className='flex flex-col justify-center'>
       {/* status Icon */}
       <div className='w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mx-auto'>
         {status === 'success' ? (
-          <CircleCheck size={48} color='#23A26D' />
+          <Icon name='CircleCheck' size={48} color='#23A26D' />
         ) : (
-          <CircleX size={48} color='#f00' />
+          <Icon name='CircleCheck' size={48} color='#f00' />
         )}
       </div>
 
@@ -79,7 +80,7 @@ export const PaymentDetailPage = () => {
           {Number(5000).toLocaleString('ko')} KRW
         </p>
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

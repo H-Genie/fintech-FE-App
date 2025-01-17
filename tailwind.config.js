@@ -30,6 +30,9 @@ export default {
       fontFamily: {
         sans: ['Pretendard', 'Arial', 'sans-serif'],
       },
+      width: {
+        responsive_container: 'min(100%, 600px)',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],

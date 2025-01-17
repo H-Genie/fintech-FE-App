@@ -1,12 +1,8 @@
+import PageLayout from '@shared/ui/PageLayout';
+
 const QRPaymentDetailPage = () => {
   return (
-    <div
-      className='bg-gradient-to-br from-[#3c1488] via-[#408693] to-[#1e7f84] w-full h-screen flex justify-center items-center'
-      style={{
-        margin: '-32px -16px',
-        width: 'calc(100% + 32px)',
-      }}
-    >
+    <PageLayout className='bg-gradient-to-br from-[#3c1488] via-[#408693] to-[#1e7f84] w-full  flex justify-center items-center'>
       <div className='bg-white w-[320px] h-[600px] rounded-[1rem] flex flex-col justify-center items-center'>
         <img src='/logo.png' className='w-24' alt='Logo' />
         <p className='mt-8 text-2xl font-medium'>결제를 하시겠습니까?</p>
@@ -59,7 +55,7 @@ const QRPaymentDetailPage = () => {
           취소하기
         </button>
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

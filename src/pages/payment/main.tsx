@@ -1,14 +1,9 @@
-import { CircleUserRound } from 'lucide-react';
 import PaymentList from './components/PaymentList';
+import PageLayout from '@shared/ui/PageLayout';
 
 const PaymentPage = () => {
   return (
-    <div className='p-4 pb-24'>
-      <div className='w-full h-12'>
-        <div className='h-full flex justify-end items-center mr-2 cursor-pointer'>
-          <CircleUserRound size={24} color='#6B7280' />
-        </div>
-      </div>
+    <PageLayout hasNav className='pt-6 pb-24'>
       <ul>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (
           <PaymentList key={item} />
@@ -18,7 +13,7 @@ const PaymentPage = () => {
       <button className='w-full h-12 bg-white text-[#18A0FB] border border-[#18A0FB] rounded-full font-bold'>
         더보기
       </button>
-    </div>
+    </PageLayout>
   );
 };
 

@@ -1,4 +1,12 @@
-import { List, Camera, CreditCard, LoaderCircle, Loader } from 'lucide-react';
+import {
+  List,
+  Camera,
+  CreditCard,
+  LoaderCircle,
+  Loader,
+  CircleCheck,
+  CircleX,
+} from 'lucide-react';
 
 export const ICON_PALLETTE = {
   List,
@@ -6,4 +14,6 @@ export const ICON_PALLETTE = {
   CreditCard,
   LoaderCircle,
   Loader,
+  CircleCheck,
+  CircleX,
 };
