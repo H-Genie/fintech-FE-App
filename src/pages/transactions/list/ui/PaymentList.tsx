@@ -1,3 +1,4 @@
+import { ROUTES } from '@shared/config/routes';
 import { useNavigate } from 'react-router-dom';
 
 const PaymentList = () => {
@@ -5,7 +6,7 @@ const PaymentList = () => {
   return (
     <li
       className='w-full h-16 border-b border-gray-200 flex justify-between items-center px-4 mb-4 cursor-pointer'
-      onClick={() => navigate('/payment/detail')}
+      onClick={() => navigate(ROUTES.TRANSACTIONS.DETAIL)}
     >
       <div>
         <p className='font-bold'>23,000 KRW</p>

@@ -16,37 +16,45 @@ const LoginPage = lazy(() =>
 const SignupPage = lazy(() =>
   import('@pages/auth/signup').then((m) => ({ default: m.default })),
 );
-const PaymentPage = lazy(() =>
-  import('@pages/payment/main').then((m) => ({ default: m.default })),
-);
-const PaymentDetailPage = lazy(() =>
-  import('@pages/payment/detail').then((m) => ({ default: m.default })),
-);
+
 const QRPage = lazy(() =>
-  import('@pages/qr/main').then((m) => ({ default: m.default })),
-);
-const CardPage = lazy(() =>
-  import('@pages/card/main').then((m) => ({ default: m.default })),
-);
-const QRScanPage = lazy(() =>
-  import('@pages/qr/scan').then((m) => ({ default: m.default })),
+  import('@pages/payment/qr').then((m) => ({ default: m.QRPage })),
 );
 const QRPaymentDetailPage = lazy(() =>
-  import('@pages/qr/payment/detail').then((m) => ({ default: m.default })),
+  import('@pages/payment/detail').then((m) => ({
+    default: m.QRPaymentDetailPage,
+  })),
 );
 const QRPaymentCompletePage = lazy(() =>
-  import('@pages/qr/payment/complete').then((m) => ({ default: m.default })),
+  import('@pages/payment/complete').then((m) => ({
+    default: m.QRPaymentCompletePage,
+  })),
+);
+
+const TransactionsPage = lazy(() =>
+  import('@pages/transactions/list').then((m) => ({
+    default: m.TransactionsListPage,
+  })),
+);
+const TransactionDetailPage = lazy(() =>
+  import('@pages/transactions/detail').then((m) => ({
+    default: m.TransactionDetailPage,
+  })),
+);
+const CardPage = lazy(() =>
+  import('@pages/card/list').then((m) => ({ default: m.CardPage })),
 );
 
 const SuspendedLoginPage = withSuspense(LoginPage);
 const SuspendedSignupPage = withSuspense(SignupPage);
+
 const SuspendedQRPage = withSuspense(QRPage);
-const SuspendedPaymentPage = withSuspense(PaymentPage);
-const SuspendedPaymentDetailPage = withSuspense(PaymentDetailPage);
-const SuspendedCardPage = withSuspense(CardPage);
-const SuspendedQRScanPage = withSuspense(QRScanPage);
 const SuspendedQRPaymentDetailPage = withSuspense(QRPaymentDetailPage);
 const SuspendedQRPaymentCompletePage = withSuspense(QRPaymentCompletePage);
+
+const SuspendedTransactionsPage = withSuspense(TransactionsPage);
+const SuspendedTransactionDetailPage = withSuspense(TransactionDetailPage);
+const SuspendedCardPage = withSuspense(CardPage);
 
 // 라우트 설정
 const routes = {
@@ -59,11 +67,17 @@ const routes = {
         { index: true, element: <SplashPage /> },
         { path: ROUTES.LOGIN, element: <SuspendedLoginPage /> },
         { path: ROUTES.SIGNUP, element: <SuspendedSignupPage /> },
-        { path: ROUTES.QR.SCAN, element: <SuspendedQRScanPage /> },
-        { path: ROUTES.QR.DETAIL, element: <SuspendedQRPaymentDetailPage /> },
         {
-          path: ROUTES.QR.COMPLETE,
+          path: ROUTES.PAYMENT.DETAIL,
+          element: <SuspendedQRPaymentDetailPage />,
+        },
+        {
+          path: ROUTES.PAYMENT.COMPLETE,
           element: <SuspendedQRPaymentCompletePage />,
+        },
+        {
+          path: ROUTES.TRANSACTIONS.DETAIL,
+          element: <SuspendedTransactionDetailPage />,
         },
       ],
     },
@@ -72,13 +86,12 @@ const routes = {
     {
       element: <BottomNavLayout />,
       children: [
-        { path: ROUTES.PAYMENT.MAIN, element: <SuspendedPaymentPage /> },
+        { path: ROUTES.PAYMENT.QR, element: <SuspendedQRPage /> },
         {
-          path: ROUTES.PAYMENT.DETAIL,
-          element: <SuspendedPaymentDetailPage />,
+          path: ROUTES.TRANSACTIONS.LIST,
+          element: <SuspendedTransactionsPage />,
         },
-        { path: ROUTES.QR.MAIN, element: <SuspendedQRPage /> },
-        { path: ROUTES.CARD.MAIN, element: <SuspendedCardPage /> },
+        { path: ROUTES.CARD.LIST, element: <SuspendedCardPage /> },
       ],
     },
     {

@@ -1,6 +1,63 @@
+import { ROUTES } from '@shared/config/routes';
+import { useQueryParams } from '@shared/hooks';
+import { useOrderInfo } from '@shared/hooks/queries/usePayments';
+import useModal from '@shared/hooks/useModal';
 import PageLayout from '@shared/ui/PageLayout';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const QRPaymentDetailPage = () => {
+  const navigate = useNavigate();
+  const { openDialog, closeModal } = useModal();
+  const { params, isLoading } = useQueryParams();
+  const { token, expiredAt } = params;
+
+  useEffect(() => {
+    if (isLoading) return;
+
+    let errorMessage = '';
+
+    if (!token) {
+      errorMessage = 'QR 결제 정보가 없습니다.\n다시 시도해 주세요.';
+    } else if (expiredAt && new Date().getTime() > Number(expiredAt)) {
+      errorMessage = '만료된 QR 코드입니다.\n다시 시도해 주세요.';
+    }
+
+    if (errorMessage) {
+      openDialog('alert', {
+        title: '오류',
+        description: errorMessage,
+        confirm: () => {
+          closeModal();
+          navigate(`${ROUTES.PAYMENT.QR}`);
+        },
+      });
+    }
+  }, [isLoading]);
+
+  const {
+    data: orderData,
+    isLoading: orderLoading,
+    isError: orderError,
+  } = useOrderInfo(token || '');
+
+  useEffect(() => {
+    if (orderError) {
+      openDialog('alert', {
+        title: '오류',
+        description:
+          '주문 정보를 불러오는데 실패했습니다.\n다시 시도해 주세요.',
+        confirm: () => {
+          closeModal();
+          navigate(`${ROUTES.PAYMENT.QR}`);
+        },
+      });
+    }
+  }, [orderError, openDialog, closeModal, navigate]);
+
+  if (orderLoading) return <div>주문 정보 로딩 중...</div>;
+  if (isLoading) return <div>Loading...</div>;
+
   return (
     <PageLayout className='bg-gradient-to-br from-[#3c1488] via-[#408693] to-[#1e7f84] w-full  flex justify-center items-center'>
       <div className='bg-white w-[320px] h-[600px] rounded-[1rem] flex flex-col justify-center items-center'>
@@ -12,7 +69,7 @@ const QRPaymentDetailPage = () => {
         <div className='flex justify-between items-center px-8 w-full'>
           <p className='text-gray-500'>상점</p>
           <p className='overflow-hidden text-ellipsis whitespace-nowrap max-w-[70%]'>
-            (주)쿠팡(주)쿠팡(주)쿠팡(주)쿠팡(주)쿠팡(주)쿠팡(주)쿠팡
+            {orderData?.store}
           </p>
         </div>
 
@@ -32,8 +89,7 @@ const QRPaymentDetailPage = () => {
               maxWidth: '70%',
             }}
           >
-            iPhone 16 Pro 128GB Natural Titanum iPhone 16 Pro 128GB Natural
-            Titanum
+            {orderData?.orderName}
           </p>
         </div>
 
@@ -42,7 +98,7 @@ const QRPaymentDetailPage = () => {
         <div className='flex justify-between items-center px-8 w-full'>
           <p className='text-gray-500'>가격</p>
           <p className='max-w-[70%] font-bold'>
-            {Number(1200000).toLocaleString('ko')} KRW
+            {Number(orderData?.amount).toLocaleString('ko')} KRW
           </p>
         </div>
 

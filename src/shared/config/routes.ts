@@ -3,16 +3,15 @@ export const ROUTES = {
   LOGIN: '/login',
   SIGNUP: '/signup',
   PAYMENT: {
-    MAIN: '/payment',
-    DETAIL: '/payment/:id',
+    QR: '/payment/qr',
+    DETAIL: '/payment/detail',
+    COMPLETE: '/payment/complete',
   },
-  QR: {
-    MAIN: '/qr',
-    SCAN: '/qr/scan',
-    DETAIL: '/qr/payment/:id',
-    COMPLETE: '/qr/payment/complete',
+  TRANSACTIONS: {
+    LIST: '/transactions',
+    DETAIL: '/transactions/:id',
   },
   CARD: {
-    MAIN: '/card',
+    LIST: '/card',
   },
 } as const;

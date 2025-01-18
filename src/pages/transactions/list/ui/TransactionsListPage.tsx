@@ -1,7 +1,7 @@
-import PaymentList from './components/PaymentList';
+import PaymentList from './PaymentList';
 import PageLayout from '@shared/ui/PageLayout';
 
-const PaymentPage = () => {
+const TransactionsListPage = () => {
   return (
     <PageLayout hasNav className='pt-6 pb-24'>
       <ul>
@@ -17,4 +17,4 @@ const PaymentPage = () => {
   );
 };
 
-export default PaymentPage;
+export default TransactionsListPage;

@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 
 type PaymentStatus = 'success' | 'canceled';
 
-export const PaymentDetailPage = () => {
+export const TransactionDetailPage = () => {
   // TODO: 퍼블리싱 단계에서 결제/취소 구분할려고 만든 값이므로 API 연결하면 수정하세요
   const status = useMemo<PaymentStatus>(() => 'canceled', []);
 
@@ -84,4 +84,4 @@ export const PaymentDetailPage = () => {
   );
 };
 
-export default PaymentDetailPage;
+export default TransactionDetailPage;

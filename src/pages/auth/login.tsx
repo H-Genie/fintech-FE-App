@@ -1,3 +1,4 @@
+import { ROUTES } from '@shared/config/routes';
 import Button from '@shared/ui/button/Button';
 import PageLayout from '@shared/ui/PageLayout';
 import { useState } from 'react';
@@ -14,7 +15,7 @@ export const LoginPage = () => {
 
     // TODO: 퍼블리싱 단계에서 임시로 넘어가기 위한 로직
     if (email === 'admin@admin.com' && password === '1234') {
-      navigate('/payment');
+      navigate(`${ROUTES.PAYMENT.QR}`);
     }
   };
 
