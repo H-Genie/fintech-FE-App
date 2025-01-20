@@ -4,7 +4,7 @@ import {
   useCancelPayment,
   useHistoryList,
   useHistoryDetail,
-} from '@shared/hooks/queries/usePayments';
+} from '@hooks/queries/usePayments';
 
 const ApiHookTest = () => {
   // 1. 주문 정보 조회 테스트
