@@ -7,7 +7,7 @@ export const SplashPage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate('/login');
-    }, 1000);
+    }, 1900);
 
     return () => clearTimeout(timer);
   }, [navigate]);
@@ -17,7 +17,7 @@ export const SplashPage = () => {
       className='h-screen m-0 flex flex-col justify-center items-center -mx-4 -my-8'
       style={{ background: 'linear-gradient(135deg, #89CFF0, #007BFF)' }}
     >
-      <img src='/logo.png' alt='Logo' className='w-48' />
+      <img src='/animate.gif' alt='Logo' className='w-48' width={200} />
       <h2 className='text-5xl mt-8 font-black text-[#e1e1e1]'>PAY 200</h2>
     </div>
   );
