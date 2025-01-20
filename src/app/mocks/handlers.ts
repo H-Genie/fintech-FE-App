@@ -1,4 +1,4 @@
-import { API_ENDPOINTS } from '@shared/constants/api-endpoints';
+import { API_ENDPOINTS } from '@shared/constants/apiEndpoints';
 import { http, HttpResponse } from 'msw';
 
 // user 정보 조회 핸들러 추가

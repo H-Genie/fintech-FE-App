@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { NAVIGATION_ITEMS } from '../model/constants';
-import { NavigationItem } from './nav-item';
+import { NavigationItem } from './navItem';
 import { cn } from '@shared/ui/shadcn/lib/utils';
 import { theme } from '@shared/styles/theme';
 

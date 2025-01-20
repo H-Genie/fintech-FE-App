@@ -1,6 +1,6 @@
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { paymentService } from '@shared/api/services/payment';
-import { QUERY_KEY } from '@shared/constants/api-endpoints';
+import { QUERY_KEY } from '@shared/constants/apiEndpoints';
 
 export const useOrderInfo = (orderToken: string) => {
   return useQuery({

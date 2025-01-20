@@ -1,5 +1,5 @@
 import { api } from '../api';
-import { API_ENDPOINTS } from '@shared/constants/api-endpoints';
+import { API_ENDPOINTS } from '@shared/constants/apiEndpoints';
 import type { LoginDTO, RegisterDTO } from '../types';
 
 export const authService = {
