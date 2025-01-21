@@ -18,11 +18,25 @@ export type OrderInfoDTO = {
   url?: string;
 };
 
+export enum HistoryPaymentStatus {
+  COMPLETE = 'COMPLETE',
+  CANCELED = 'CANCELED',
+}
+
+export enum HistoryPaymentMethod {
+  CARD = 'CARD',
+}
+
 // TODO: 응답 데이터 논의 필요
 export type HistoryDTO = {
-  id: number;
+  historyId: string;
+  store: string;
   orderId: string;
+  orderName: string;
+  paymentStatus: HistoryPaymentStatus;
+  paymentMethod: HistoryPaymentMethod;
   amount: number;
+  createdAt: string;
 };
 
 // TODO: 응답 데이터 논의 필요

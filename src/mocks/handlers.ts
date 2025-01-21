@@ -1,4 +1,5 @@
 import { API_ENDPOINTS } from '@constants/apiEndpoints';
+import { HistoryPaymentMethod, HistoryPaymentStatus } from '@type/api';
 import { http, HttpResponse } from 'msw';
 
 // user 정보 조회 핸들러 추가
@@ -55,19 +56,21 @@ export const handlers = [
         items: [
           {
             historyId: 'history-001',
+            store: '테스트 가맹점 A',
             orderId: 'order-001',
             orderName: '테스트 상품 A외 2건',
-            paymentStatus: 'COMPLETED', // COMPLETED, CANCELED
-            paymentMethod: 'CARD',
+            paymentStatus: HistoryPaymentStatus.COMPLETE,
+            paymentMethod: HistoryPaymentMethod.CARD,
             amount: 15000,
             createdAt: '2024-03-20T09:00:00',
           },
           {
             historyId: 'history-002',
+            store: '테스트 가맹점 B',
             orderId: 'order-002',
             orderName: '테스트 상품 B',
-            paymentStatus: 'CANCELED',
-            paymentMethod: 'CARD',
+            paymentStatus: HistoryPaymentStatus.CANCELED,
+            paymentMethod: HistoryPaymentMethod.CARD,
             amount: 25000,
             createdAt: '2024-03-19T15:30:00',
           },
