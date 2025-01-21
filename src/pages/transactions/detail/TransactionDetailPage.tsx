@@ -1,32 +1,35 @@
+import { useHistoryDetail } from '@hooks/queries/usePayments';
+import { HistoryPaymentStatus } from '@type/api';
 import Icon from '@ui/components/icon/Icon';
 import PageLayout from '@ui/layouts/PageLayout';
 import { useMemo } from 'react';
 
-type PaymentStatus = 'success' | 'canceled';
-
 const TransactionDetailPage = () => {
+  const { data: historyDetail } = useHistoryDetail('history-123');
+  console.log(historyDetail);
+
   // TODO: 퍼블리싱 단계에서 결제/취소 구분할려고 만든 값이므로 API 연결하면 수정하세요
-  const status = useMemo<PaymentStatus>(() => 'canceled', []);
+  const status = useMemo(() => HistoryPaymentStatus.COMPLETE, []);
 
   return (
     <PageLayout hasNav className='flex flex-col justify-center'>
       {/* status Icon */}
       <div className='w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mx-auto'>
-        {status === 'success' ? (
+        {status === HistoryPaymentStatus.COMPLETE ? (
           <Icon name='CircleCheck' size={48} color='#23A26D' />
         ) : (
-          <Icon name='CircleCheck' size={48} color='#f00' />
+          <Icon name='CircleX' size={48} color='#f00' />
         )}
       </div>
 
       {/* status Message */}
       <p className='text-center mt-4'>
-        {status === 'success' ? '결제 성공!' : '결제 취소'}
+        {status === HistoryPaymentStatus.COMPLETE ? '결제 성공!' : '결제 취소'}
       </p>
 
       {/* Amount */}
       <h2
-        className={`text-center mt-4 font-bold text-3xl ${status === 'success' ? 'text-black' : 'text-red-500'}`}
+        className={`text-center mt-4 font-bold text-3xl ${status === HistoryPaymentStatus.COMPLETE ? 'text-black' : 'text-red-500'}`}
       >
         {Number(55000).toLocaleString('ko')} KRW
       </h2>
@@ -43,7 +46,7 @@ const TransactionDetailPage = () => {
 
       <div className='flex justify-between items-center px-4'>
         <p className='text-gray-500'>
-          {status === 'success' ? '결제 일시' : '취소 일시'}
+          {status === HistoryPaymentStatus.COMPLETE ? '결제 일시' : '취소 일시'}
         </p>
         <p>2025-01-01 12:31:59</p>
       </div>
