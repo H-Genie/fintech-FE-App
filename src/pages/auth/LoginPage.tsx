@@ -1,35 +1,55 @@
+import { authService } from '@api/services/auth';
 import { ROUTES } from '@constants/routes';
+import useModal from '@hooks/useModal';
+import { useMutation } from '@tanstack/react-query';
+import type { LoginDTO } from '@type/api';
 import Button from '@ui/components/button/Button';
 import PageLayout from '@ui/layouts/PageLayout';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 export const LoginPage = () => {
+  const { openDialog } = useModal();
   const [isShow, setIsShow] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [loginData, setLoginData] = useState<LoginDTO>({
+    email: 'admin@admin.com',
+    password: '1234',
+  });
   const navigate = useNavigate();
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    // TODO: 퍼블리싱 단계에서 임시로 넘어가기 위한 로직
-    if (email === 'admin@admin.com' && password === '1234') {
-      navigate(`${ROUTES.PAYMENT.QR}`);
-    }
+  const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setLoginData((prev) => ({ ...prev, [name]: value }));
   };
+  const { isPending } = useMutation({
+    mutationKey: ['login'],
+    mutationFn: () => authService.login(loginData),
+    onSuccess: () => navigate(`${ROUTES.PAYMENT.QR}`),
+    onError: async (e) => {
+      openDialog('alert', {
+        title: '로그인 실패',
+        description: (
+          <div>
+            <p>{e.message}</p>
+          </div>
+        ),
+      });
+    },
+  });
 
   return (
     <PageLayout className='flex flex-col items-center justify-center'>
       <img src='/logo.png' className='w-24' alt='Logo' />
 
-      <form className='w-[356px] flex flex-col' onSubmit={onSubmit}>
+      <div className='w-[356px] flex flex-col'>
         <div className='pt-16' />
 
         <input
           type='email'
+          name='email'
           placeholder='Email'
-          onChange={(e) => setEmail(e.target.value)}
+          value={loginData.email}
+          onChange={onChangeValue}
           className='bg-[#f6f6f6] border border-[#e8e8e8] outline-none h-12 rounded-md pl-4'
         />
 
@@ -38,8 +58,10 @@ export const LoginPage = () => {
         <div className='relative'>
           <input
             type={isShow ? 'text' : 'password'}
+            name='password'
             placeholder='Password'
-            onChange={(e) => setPassword(e.target.value)}
+            value={loginData.password}
+            onChange={onChangeValue}
             className='bg-[#f6f6f6] border border-[#e8e8e8] outline-none h-12 rounded-md pl-4 w-full'
           />
           <span
@@ -62,13 +84,18 @@ export const LoginPage = () => {
 
         <Button
           size={'extraLarge'}
-          disabled={email.length === 0 || password.length === 0}
-          isPending={false}
+          disabled={
+            loginData.email.length === 0 || loginData.password.length === 0
+          }
+          isPending={isPending}
           rounded
+          onClick={() => {
+            navigate(`${ROUTES.PAYMENT.QR}`);
+          }}
         >
           로그인
         </Button>
-      </form>
+      </div>
     </PageLayout>
   );
 };
