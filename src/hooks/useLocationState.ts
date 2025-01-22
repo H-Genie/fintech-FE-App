@@ -45,7 +45,7 @@ export const useLocationState = <T extends Record<string, unknown>>(): {
   isLoading: boolean;
 } => {
   const location = useLocation(); // 현재 라우터 위치 가져오기
-  const [state, setState] = useState<T | null>(null); // 상태 초기화 (null로 시작)
+  const [state, setState] = useState<T | null>(location.state as T | null); // 초기 상태를 location.state로 설정
   const [isLoading, setIsLoading] = useState(true); // 로딩 상태 관리
 
   useEffect(() => {
