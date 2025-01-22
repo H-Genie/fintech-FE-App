@@ -8,6 +8,8 @@ export const API_ENDPOINTS = {
   PAYMENT: {
     ORDER: {
       INFO: (orderToken: string) => `api/v1/payments/${orderToken}/info`, // 주문 상세 정보 조회
+      // 임시
+      SSE: 'payment/order/sse',
     },
     PROCESS: (orderId: string) => `api/v1/payments/${orderId}/process`, // QR 결제 요청
     CANCEL: (orderId: string) => `api/v1/payments/${orderId}/cancel`, // QR 결제 취소
