@@ -4,7 +4,7 @@ import { converDateFormat, convertCurrencyFormat } from '@lib/util/locale';
 import type { HistoryDTO } from '@type/api';
 import ErrorComponent from '@ui/components/error/ErrorComponent';
 import LoadingAnimation from '@ui/components/loading/LoadingAnimation';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, generatePath } from 'react-router-dom';
 
 type HistoryResponse = {
   items: HistoryDTO[];
@@ -33,7 +33,12 @@ const PaymentList = () => {
         <li
           key={list.historyId}
           className='w-full h-16 border-b border-gray-200 flex justify-between items-center px-4 mb-4 cursor-pointer'
-          onClick={() => navigate(ROUTES.TRANSACTIONS.DETAIL)}
+          onClick={() => {
+            const path = generatePath(ROUTES.TRANSACTIONS.DETAIL, {
+              id: list.historyId,
+            });
+            navigate(path);
+          }}
         >
           <div>
             <p className='font-bold'>
