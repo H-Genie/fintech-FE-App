@@ -8,6 +8,7 @@ import SplashPage from '@pages/splash/Splash';
 import ModalUITest from '@pages/test/ModalUITest';
 import ApiHookTest from '@pages/test/ApiHookTest';
 import ButtonSample from '@pages/test/ButtonSample';
+import SSETest from '@pages/test/SSETest';
 
 // Lazy load pages
 const LoginPage = lazy(() =>
@@ -105,6 +106,10 @@ const routes = {
     {
       path: '/api-hook-test',
       element: <ApiHookTest />,
+    },
+    {
+      path: '/sse-hook-test',
+      element: <SSETest />,
     },
   ],
 };
