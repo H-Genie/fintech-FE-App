@@ -15,6 +15,12 @@ const QRPage = () => {
     };
 
     if (state) {
+      /**
+       * @todo
+       * state로 전달하는건 조작이 가능하지만 일단은 이렇게 구현.
+       * 후에 백엔드와 논의 후 api를 요청해야 함
+       */
+
       navigate(`${ROUTES.PAYMENT.DETAIL}`, { state });
     } else {
       alert('QR에 유효한 값이 없습니다.');
