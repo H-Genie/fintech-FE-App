@@ -41,7 +41,18 @@ export type HistoryDTO = {
 
 // TODO: 응답 데이터 논의 필요
 export type HistoryDetailDTO = {
-  id: number;
+  historyId: string;
   orderId: string;
+  orderName: string;
+  paymentStatus: HistoryPaymentStatus;
+  paymentMethod: HistoryPaymentMethod;
   amount: number;
+  cardInfo: {
+    cardCompany: string;
+    cardNumber: string;
+    installmentPeriod: number;
+  };
+  store: string;
+  createdAt: string;
+  canceledAt: string | null;
 };

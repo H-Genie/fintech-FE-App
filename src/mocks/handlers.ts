@@ -88,7 +88,7 @@ export const handlers = [
         historyId: 'history-001',
         orderId: 'order-001',
         orderName: '테스트 상품 A외 2건',
-        paymentStatus: 'COMPLETED',
+        paymentStatus: HistoryPaymentStatus.COMPLETE,
         paymentMethod: 'CARD',
         amount: 15000,
         cardInfo: {

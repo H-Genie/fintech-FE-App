@@ -2,6 +2,8 @@ import { ROUTES } from '@constants/routes';
 import { useHistoryList } from '@hooks/queries/usePayments';
 import { converDateFormat, convertCurrencyFormat } from '@lib/util/locale';
 import type { HistoryDTO } from '@type/api';
+import ErrorComponent from '@ui/components/error/ErrorComponent';
+import LoadingAnimation from '@ui/components/loading/LoadingAnimation';
 import { useNavigate } from 'react-router-dom';
 
 type HistoryResponse = {
@@ -11,7 +13,19 @@ type HistoryResponse = {
 
 const PaymentList = () => {
   const navigate = useNavigate();
-  const { data } = useHistoryList() as unknown as { data: HistoryResponse };
+  const { data, isLoading, isError } = useHistoryList() as {
+    data: HistoryResponse | undefined;
+    isLoading: boolean;
+    isError: boolean;
+  };
+
+  if (isLoading) {
+    return <LoadingAnimation />;
+  }
+
+  if (isError) {
+    return <ErrorComponent />;
+  }
 
   return (
     <ul>
