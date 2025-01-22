@@ -9,12 +9,16 @@ const QRPage = () => {
 
   const handleScanSuccess = (resultUrl: string) => {
     const result = parseQueryString(resultUrl);
-    navigate(`${ROUTES.PAYMENT.DETAIL}`, {
-      state: {
-        token: result.token,
-        expiredAt: result.expiredAt,
-      },
-    });
+    const state = {
+      token: result.token,
+      expiredAt: result.expiredAt,
+    };
+
+    if (state) {
+      navigate(`${ROUTES.PAYMENT.DETAIL}`, { state });
+    } else {
+      alert('QR에 유효한 값이 없습니다.');
+    }
   };
 
   return (
