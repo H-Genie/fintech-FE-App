@@ -1,6 +1,7 @@
 import { useHistoryDetail } from '@hooks/queries/usePayments';
 import { convertCurrencyFormat } from '@lib/util/locale';
 import { HistoryPaymentStatus } from '@type/api';
+import Button from '@ui/components/button/Button';
 import ErrorComponent from '@ui/components/error/ErrorComponent';
 import LoadingAnimation from '@ui/components/loading/LoadingAnimation';
 import DetailRow from '@ui/components/transactionDetailPage/DetailRow';
@@ -35,8 +36,8 @@ const TransactionDetailPage = () => {
   }
 
   return (
-    <PageLayout hasNav className='flex flex-col justify-center'>
-      <div>
+    <PageLayout hasNav className='flex flex-col justify-center py-8'>
+      <div className='mt-8'>
         <PaymentResultDisplay data={data?.paymentStatus} />
 
         <h2
@@ -72,7 +73,16 @@ const TransactionDetailPage = () => {
         <TaxRow label='부가세' value={taxValue.tax} />
       </div>
 
-      <button>확인</button>
+      <Button
+        size={'extraLarge'}
+        width={'fit'}
+        variant={'outline_primary'}
+        rounded
+        className='m-auto mt-8'
+        onClick={() => window.history.back()}
+      >
+        확인
+      </Button>
     </PageLayout>
   );
 };
