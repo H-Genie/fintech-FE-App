@@ -2,7 +2,7 @@ import ky, { HTTPError, type Options } from 'ky';
 import { API_BASE_URL } from '../config';
 
 type ApiResponse<T> = {
-  code: string;
+  code: number;
   data: T;
   message?: string;
 };
@@ -80,11 +80,17 @@ export const api = {
     url: string,
     body: R,
     options?: Options,
-  ): Promise<ApiResponse<T>> => {
+  ): Promise<ApiResponse<T | null>> => {
     try {
-      return await httpClient
-        .post(url, { json: body, ...options })
-        .json<ApiResponse<T>>();
+      const response = await httpClient.put(url, { json: body, ...options });
+      const json = await response.json<ApiResponse<T>>();
+      return response.body
+        ? json
+        : {
+            code: response.status,
+            data: null,
+            message: response.statusText || 'No content returned',
+          };
     } catch (error) {
       return handleError(error);
     }
@@ -103,11 +109,17 @@ export const api = {
     url: string,
     body: R,
     options?: Options,
-  ): Promise<ApiResponse<T>> => {
+  ): Promise<ApiResponse<T | null>> => {
     try {
-      return await httpClient
-        .put(url, { json: body, ...options })
-        .json<ApiResponse<T>>();
+      const response = await httpClient.put(url, { json: body, ...options });
+      const json = await response.json<ApiResponse<T>>();
+      return response.body
+        ? json
+        : {
+            code: response.status,
+            data: null,
+            message: response.statusText || 'No content returned',
+          };
     } catch (error) {
       return handleError(error);
     }
