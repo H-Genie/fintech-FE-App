@@ -41,7 +41,7 @@ const TransactionDetailPage = () => {
         <PaymentResultDisplay data={data?.paymentStatus} />
 
         <h2
-          className={`text-center mt-4 font-bold text-3xl ${data?.paymentStatus === HistoryPaymentStatus.COMPLETE ? 'text-black' : 'text-red-500'}`}
+          className={`text-center mt-4 font-bold text-3xl ${data?.paymentStatus === HistoryPaymentStatus.COMPLETED ? 'text-black' : 'text-red-500'}`}
         >
           {convertCurrencyFormat(data?.amount ?? 0)} KRW
         </h2>
@@ -51,12 +51,12 @@ const TransactionDetailPage = () => {
         <DetailRow label='거래 번호' value={data?.historyId} />
         <DetailRow
           label={
-            data?.paymentStatus === HistoryPaymentStatus.COMPLETE
+            data?.paymentStatus === HistoryPaymentStatus.COMPLETED
               ? '결제 일시'
               : '취소 일시'
           }
           value={
-            data?.paymentStatus === HistoryPaymentStatus.COMPLETE
+            data?.paymentStatus === HistoryPaymentStatus.COMPLETED
               ? data.createdAt
               : data?.canceledAt
           }

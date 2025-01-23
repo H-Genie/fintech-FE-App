@@ -19,7 +19,7 @@ export type OrderInfoDTO = {
 };
 
 export enum HistoryPaymentStatus {
-  COMPLETE = 'COMPLETE',
+  COMPLETED = 'COMPLETED',
   CANCELED = 'CANCELED',
 }
 
