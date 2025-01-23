@@ -22,18 +22,18 @@ export const useCancelPayment = () => {
   });
 };
 
-export const useHistoryList = () => {
+export const useTransactionList = () => {
   return useQuery({
     queryKey: [QUERY_KEY.MANAGEMENT.HISTORY],
-    queryFn: () => paymentService.getHistoryList(),
+    queryFn: () => paymentService.getTransactionList(),
     select: (response) => response.data,
   });
 };
 
-export const useHistoryDetail = (id: string) => {
+export const useTransactionDetail = (id: string) => {
   return useQuery({
     queryKey: [QUERY_KEY.MANAGEMENT.HISTORY, id],
-    queryFn: () => paymentService.getHistoryDetail(id),
+    queryFn: () => paymentService.getTransactionDetail(id),
     select: (response) => response.data,
   });
 };
