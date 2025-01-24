@@ -31,38 +31,38 @@ const TransactionDetailPage = () => {
     return <LoadingAnimation />;
   }
 
-  if (isError) {
+  if (isError || !data) {
     return <ErrorComponent />;
   }
 
   return (
     <PageLayout hasNav className='flex flex-col justify-center py-8'>
       <div className='mt-8'>
-        <PaymentResultDisplay data={data?.paymentStatus} />
+        <PaymentResultDisplay data={data.paymentStatus} />
 
         <h2
-          className={`text-center mt-4 font-bold text-3xl ${data?.paymentStatus === HistoryPaymentStatus.COMPLETED ? 'text-black' : 'text-red-500'}`}
+          className={`text-center mt-4 font-bold text-3xl ${data.paymentStatus === HistoryPaymentStatus.COMPLETED ? 'text-black' : 'text-red-500'}`}
         >
-          {convertCurrencyFormat(data?.amount ?? 0)} KRW
+          {convertCurrencyFormat(data.amount)} KRW
         </h2>
       </div>
       <hr className='my-8 border-b border-gray-200 w-full' />
       <div>
-        <DetailRow label='거래 번호' value={data?.historyId} />
+        <DetailRow label='거래 번호' value={data.historyId} />
         <DetailRow
           label={
-            data?.paymentStatus === HistoryPaymentStatus.COMPLETED
+            data.paymentStatus === HistoryPaymentStatus.COMPLETED
               ? '결제 일시'
               : '취소 일시'
           }
           value={
-            data?.paymentStatus === HistoryPaymentStatus.COMPLETED
+            data.paymentStatus === HistoryPaymentStatus.COMPLETED
               ? data.createdAt
-              : data?.canceledAt
+              : data.canceledAt
           }
         />
-        <DetailRow label='카드번호' value={data?.cardInfo.cardNumber} />
-        <DetailRow label='상점명' value={data?.store} />
+        <DetailRow label='카드번호' value={data.cardInfo.cardNumber} />
+        <DetailRow label='상점명' value={data.store} />
       </div>
       <hr className='mb-8 border-b-2 border-dashed border-gray-200 w-full' />
       <div>

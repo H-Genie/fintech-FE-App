@@ -23,13 +23,13 @@ const PaymentList = () => {
     return <LoadingAnimation />;
   }
 
-  if (isError) {
+  if (isError || !data) {
     return <ErrorComponent />;
   }
 
   return (
     <ul>
-      {data?.items.map((list) => (
+      {data.items.map((list) => (
         <li
           key={list.historyId}
           className='w-full h-16 border-b border-gray-200 flex justify-between items-center px-4 mb-4 cursor-pointer'
