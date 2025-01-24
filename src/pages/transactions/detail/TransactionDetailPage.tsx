@@ -1,5 +1,5 @@
 import { useHistoryDetail } from '@hooks/queries/usePayments';
-import { convertCurrencyFormat } from '@lib/util/locale';
+import { convertCurrencyFormat } from '@lib/fomatter';
 import { HistoryPaymentStatus } from '@type/api';
 import Button from '@ui/components/button/Button';
 import ErrorComponent from '@ui/components/error/ErrorComponent';

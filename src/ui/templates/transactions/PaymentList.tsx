@@ -1,6 +1,6 @@
 import { ROUTES } from '@constants/routes';
 import { useHistoryList } from '@hooks/queries/usePayments';
-import { converDateFormat, convertCurrencyFormat } from '@lib/util/locale';
+import { converDateFormat, convertCurrencyFormat } from '@lib/fomatter';
 import type { HistoryDTO } from '@type/api';
 import ErrorComponent from '@ui/components/error/ErrorComponent';
 import LoadingAnimation from '@ui/components/loading/LoadingAnimation';
