@@ -1,10 +1,15 @@
 import { api } from '@lib/apiClient';
-import type { HistoryDetailDTO, HistoryDTO, OrderInfoDTO } from '@type/api';
+
 import { API_ENDPOINTS } from '@constants/apiEndpoints';
+import type {
+  TransactionDetailRes,
+  OrderInfoRes,
+  TransactionsPageRes,
+} from '@type/responses/payment';
 
 export const paymentService = {
   getOrderInfo: (orderToken: string) =>
-    api.get<OrderInfoDTO>(API_ENDPOINTS.PAYMENT.ORDER.INFO(orderToken)),
+    api.get<OrderInfoRes>(API_ENDPOINTS.PAYMENT.ORDER.INFO(orderToken)),
 
   requestPayment: (orderId: string) =>
     api.post(API_ENDPOINTS.PAYMENT.PROCESS(orderId), {}),
@@ -12,11 +17,11 @@ export const paymentService = {
   cancelPayment: (orderId: string) =>
     api.post(API_ENDPOINTS.PAYMENT.CANCEL(orderId), {}),
 
-  getHistoryList: () =>
-    api.get<HistoryDTO[]>(API_ENDPOINTS.MANAGEMENT.HISTORY.LIST),
+  getTransactionList: () =>
+    api.get<TransactionsPageRes>(API_ENDPOINTS.MANAGEMENT.HISTORY.LIST),
 
-  getHistoryDetail: (historyId: string) =>
-    api.get<HistoryDetailDTO>(
-      API_ENDPOINTS.MANAGEMENT.HISTORY.DETAIL(historyId),
+  getTransactionDetail: (transactionId: string) =>
+    api.get<TransactionDetailRes>(
+      API_ENDPOINTS.MANAGEMENT.HISTORY.DETAIL(transactionId),
     ),
 };
