@@ -1,85 +1,88 @@
-import Icon from '@ui/components/icon/Icon';
+import { useHistoryDetail } from '@hooks/queries/usePayments';
+import { convertCurrencyFormat } from '@lib/fomatter';
+import { HistoryPaymentStatus } from '@type/api';
+import Button from '@ui/components/button/Button';
+import ErrorComponent from '@ui/components/error/ErrorComponent';
+import LoadingAnimation from '@ui/components/loading/LoadingAnimation';
+import DetailRow from '@ui/components/transactionDetailPage/DetailRow';
+import PaymentResultDisplay from '@ui/components/transactionDetailPage/PaymentResultDisplay';
+import TaxRow from '@ui/components/transactionDetailPage/TaxRow';
 import PageLayout from '@ui/layouts/PageLayout';
 import { useMemo } from 'react';
-
-type PaymentStatus = 'success' | 'canceled';
+import { useLocation } from 'react-router-dom';
 
 const TransactionDetailPage = () => {
-  // TODO: 퍼블리싱 단계에서 결제/취소 구분할려고 만든 값이므로 API 연결하면 수정하세요
-  const status = useMemo<PaymentStatus>(() => 'canceled', []);
+  const location = useLocation();
+  const historyId = location.pathname.split('/').pop() || '';
+
+  const { data, isLoading, isError } = useHistoryDetail(historyId);
+
+  const taxValue = useMemo(() => {
+    if (!data) {
+      return { price: 0, tax: 0 };
+    } else {
+      const price = Math.round(data.amount / 1.1);
+      const tax = Math.round(data.amount - price);
+      return { price, tax };
+    }
+  }, [data]);
+
+  if (isLoading) {
+    return <LoadingAnimation />;
+  }
+
+  if (isError || !data) {
+    return <ErrorComponent />;
+  }
 
   return (
-    <PageLayout hasNav className='flex flex-col justify-center'>
-      {/* status Icon */}
-      <div className='w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mx-auto'>
-        {status === 'success' ? (
-          <Icon name='CircleCheck' size={48} color='#23A26D' />
-        ) : (
-          <Icon name='CircleCheck' size={48} color='#f00' />
-        )}
+    <PageLayout hasNav className='flex flex-col justify-center py-8'>
+      <div className='mt-8'>
+        <PaymentResultDisplay data={data.paymentStatus} />
+
+        <h2
+          className={`text-center mt-4 font-bold text-3xl ${data.paymentStatus === HistoryPaymentStatus.COMPLETED ? 'text-black' : 'text-red-500'}`}
+        >
+          {convertCurrencyFormat(data.amount)} KRW
+        </h2>
       </div>
-
-      {/* status Message */}
-      <p className='text-center mt-4'>
-        {status === 'success' ? '결제 성공!' : '결제 취소'}
-      </p>
-
-      {/* Amount */}
-      <h2
-        className={`text-center mt-4 font-bold text-3xl ${status === 'success' ? 'text-black' : 'text-red-500'}`}
-      >
-        {Number(55000).toLocaleString('ko')} KRW
-      </h2>
-
       <hr className='my-8 border-b border-gray-200 w-full' />
+      <div>
+        <DetailRow label='거래 번호' value={data.historyId} />
+        <DetailRow
+          label={
+            data.paymentStatus === HistoryPaymentStatus.COMPLETED
+              ? '결제 일시'
+              : '취소 일시'
+          }
+          value={
+            data.paymentStatus === HistoryPaymentStatus.COMPLETED
+              ? data.createdAt
+              : data.canceledAt
+          }
+        />
+        <DetailRow label='카드번호' value={data.cardInfo.cardNumber} />
+        <DetailRow label='상점명' value={data.store} />
+      </div>
+      <hr className='mb-8 border-b-2 border-dashed border-gray-200 w-full' />
+      <div>
+        <TaxRow label='금액' value={taxValue.price} />
 
-      {/* Payment Details */}
-      <div className='flex justify-between items-center px-4'>
-        <p className='text-gray-500'>거래 번호</p>
-        <p>123456789</p>
+        <div role='separator' className='mb-8' />
+
+        <TaxRow label='부가세' value={taxValue.tax} />
       </div>
 
-      <div role='separator' className='mb-8' />
-
-      <div className='flex justify-between items-center px-4'>
-        <p className='text-gray-500'>
-          {status === 'success' ? '결제 일시' : '취소 일시'}
-        </p>
-        <p>2025-01-01 12:31:59</p>
-      </div>
-
-      <div role='separator' className='mb-8' />
-
-      <div className='flex justify-between items-center px-4'>
-        <p className='text-gray-500'>카드번호</p>
-        <p>1234-5678-1234-5678</p>
-      </div>
-
-      <div role='separator' className='mb-8' />
-
-      <div className='flex justify-between items-center px-4'>
-        <p className='text-gray-500'>상점명</p>
-        <p>롯데백화점 명동점</p>
-      </div>
-
-      <hr className='my-8 border-b-2 border-dashed border-gray-200 w-full' />
-
-      {/* Amount Details */}
-      <div className='flex justify-between items-center px-4'>
-        <p className='text-gray-500 text-2xl'>금액</p>
-        <p className='text-2xl font-bold'>
-          {Number(50000).toLocaleString('ko')} KRW
-        </p>
-      </div>
-
-      <div role='separator' className='mb-8' />
-
-      <div className='flex justify-between items-center px-4'>
-        <p className='text-gray-500 text-2xl'>부가세</p>
-        <p className='text-2xl font-bold'>
-          {Number(5000).toLocaleString('ko')} KRW
-        </p>
-      </div>
+      <Button
+        size={'extraLarge'}
+        width={'fit'}
+        variant={'outline_primary'}
+        rounded
+        className='m-auto mt-8'
+        onClick={() => window.history.back()}
+      >
+        확인
+      </Button>
     </PageLayout>
   );
 };

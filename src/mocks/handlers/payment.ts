@@ -1,4 +1,5 @@
 import { API_ENDPOINTS } from '@constants/apiEndpoints';
+import { HistoryPaymentMethod, HistoryPaymentStatus } from '@type/api';
 import { http, HttpResponse } from 'msw';
 
 export const paymentHandler = [
@@ -24,19 +25,21 @@ export const paymentHandler = [
         items: [
           {
             historyId: 'history-001',
+            store: '테스트 가맹점 A',
             orderId: 'order-001',
             orderName: '테스트 상품 A외 2건',
-            paymentStatus: 'COMPLETED', // COMPLETED, CANCELED
-            paymentMethod: 'CARD',
+            paymentStatus: HistoryPaymentStatus.COMPLETED,
+            paymentMethod: HistoryPaymentMethod.CARD,
             amount: 15000,
             createdAt: '2024-03-20T09:00:00',
           },
           {
             historyId: 'history-002',
+            store: '테스트 가맹점 B',
             orderId: 'order-002',
             orderName: '테스트 상품 B',
-            paymentStatus: 'CANCELED',
-            paymentMethod: 'CARD',
+            paymentStatus: HistoryPaymentStatus.CANCELED,
+            paymentMethod: HistoryPaymentMethod.CARD,
             amount: 25000,
             createdAt: '2024-03-19T15:30:00',
           },
@@ -54,8 +57,8 @@ export const paymentHandler = [
         historyId: 'history-001',
         orderId: 'order-001',
         orderName: '테스트 상품 A외 2건',
-        paymentStatus: 'COMPLETED',
-        paymentMethod: 'CARD',
+        paymentStatus: HistoryPaymentStatus.COMPLETED,
+        paymentMethod: HistoryPaymentMethod.CARD,
         amount: 15000,
         cardInfo: {
           cardCompany: '신한카드',

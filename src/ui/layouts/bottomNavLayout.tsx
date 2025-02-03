@@ -12,7 +12,7 @@ export const BottomNavLayout = () => {
           theme.safe_area_inline_padding,
         )}
       >
-        Header
+        <img src='/logo.png' width={24} />
       </header>
       <main className={cn('w-responsive_container mx-auto pb-[4rem] bg-white')}>
         <Outlet />
