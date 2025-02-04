@@ -17,3 +17,12 @@ export const PAYMENT_INSTALLMENT = {
   LUMP_SUM: 'LUMP_SUM', // 일시불
   INSTALLMENT: 'INSTALLMENT', // 할부
 } as const;
+
+export enum HistoryPaymentStatus {
+  COMPLETED = 'COMPLETED',
+  CANCELED = 'CANCELED',
+}
+
+export enum HistoryPaymentMethod {
+  CARD = 'CARD',
+}

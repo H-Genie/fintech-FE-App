@@ -1,7 +1,4 @@
-import type {
-  PAYMENT_INSTALLMENT,
-  TRANSACTION_STATUS,
-} from '@constants/payment';
+import type { InstallmentType, TransactionStatus } from '@type/payment';
 
 /**
  * 주문 정보 응답 타입
@@ -82,8 +79,3 @@ export type TransactionDetailRes = {
   cancelledAt?: string;
   transactionStatus: TransactionStatus;
 };
-
-export type TransactionStatus =
-  (typeof TRANSACTION_STATUS)[keyof typeof TRANSACTION_STATUS];
-export type InstallmentType =
-  (typeof PAYMENT_INSTALLMENT)[keyof typeof PAYMENT_INSTALLMENT];

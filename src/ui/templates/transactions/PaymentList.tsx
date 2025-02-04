@@ -1,23 +1,13 @@
 import { ROUTES } from '@constants/routes';
-import { useHistoryList } from '@hooks/queries/usePayments';
-import { converDateFormat, convertCurrencyFormat } from '@lib/fomatter';
-import type { HistoryDTO } from '@type/api';
+import { useTransactionList } from '@hooks/queries/usePayments';
+import { convertDateFormat, convertCurrencyFormat } from '@lib/formatter';
 import ErrorComponent from '@ui/components/error/ErrorComponent';
 import LoadingAnimation from '@ui/components/loading/LoadingAnimation';
 import { useNavigate, generatePath } from 'react-router-dom';
 
-type HistoryResponse = {
-  items: HistoryDTO[];
-  totalCount: number;
-};
-
 const PaymentList = () => {
   const navigate = useNavigate();
-  const { data, isLoading, isError } = useHistoryList() as {
-    data: HistoryResponse | undefined;
-    isLoading: boolean;
-    isError: boolean;
-  };
+  const { data, isLoading, isError } = useTransactionList();
 
   if (isLoading) {
     return <LoadingAnimation />;
@@ -29,13 +19,13 @@ const PaymentList = () => {
 
   return (
     <ul>
-      {data.items.map((list) => (
+      {data.transactions?.map((list) => (
         <li
-          key={list.historyId}
+          key={list.id}
           className='w-full h-16 border-b border-gray-200 flex justify-between items-center px-4 mb-4 cursor-pointer'
           onClick={() => {
             const path = generatePath(ROUTES.TRANSACTIONS.DETAIL, {
-              id: list.historyId,
+              id: list.id.toString(),
             });
             navigate(path);
           }}
@@ -47,7 +37,7 @@ const PaymentList = () => {
             <p>{list.store}</p>
           </div>
           <div className='text-gray-400'>
-            {converDateFormat(list.createdAt)}
+            {convertDateFormat(list.approvedAt)}
           </div>
         </li>
       ))}

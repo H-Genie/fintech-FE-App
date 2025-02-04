@@ -1,4 +1,4 @@
-import type { TRANSACTION_STATUS } from '@constants/payment';
+import type { TransactionStatus } from '@type/payment';
 
 /**
  * QR 결제 상세 조회 요청 타입
@@ -31,6 +31,3 @@ export type TransactionsReq = {
   size: number;
   transactionStatus?: TransactionStatus;
 };
-
-export type TransactionStatus =
-  (typeof TRANSACTION_STATUS)[keyof typeof TRANSACTION_STATUS];
