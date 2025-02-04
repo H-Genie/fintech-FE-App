@@ -4,9 +4,10 @@ import { Scanner as QRScanner } from '@yudiel/react-qr-scanner';
 interface ScannerProps {
   onScan: (resultUrl: string) => void;
   onError: (error: unknown) => void;
+  classNames: string;
 }
 
-export const Scanner: FC<ScannerProps> = ({ onScan, onError }) => {
+export const Scanner: FC<ScannerProps> = ({ onScan, onError, classNames }) => {
   return (
     <QRScanner
       onScan={(detectedCodes) => {
@@ -20,6 +21,9 @@ export const Scanner: FC<ScannerProps> = ({ onScan, onError }) => {
         onError(error);
       }}
       allowMultiple={true}
+      classNames={{
+        container: classNames,
+      }}
       styles={{
         container: {
           position: 'absolute',
