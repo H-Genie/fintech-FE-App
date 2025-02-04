@@ -1,7 +1,7 @@
-import type { OrderInfoRes } from '@type/responses/payment';
+import type { OrderInfoJwtRes } from '@type/responses/payment';
 
 interface QRDetailCardProps {
-  orderData?: OrderInfoRes;
+  orderData?: OrderInfoJwtRes;
 }
 const QRDetailContent = ({ orderData }: QRDetailCardProps) => {
   return (
@@ -14,7 +14,7 @@ const QRDetailContent = ({ orderData }: QRDetailCardProps) => {
       <div className='flex justify-between items-center w-full'>
         <p className='text-gray-500'>상점</p>
         <p className='overflow-hidden text-ellipsis whitespace-nowrap max-w-[70%]'>
-          {orderData?.store}
+          {orderData?.merchant_name}
         </p>
       </div>
 
@@ -34,7 +34,7 @@ const QRDetailContent = ({ orderData }: QRDetailCardProps) => {
             maxWidth: '70%',
           }}
         >
-          {orderData?.orderName}
+          {orderData?.order_name}
         </p>
       </div>
 
