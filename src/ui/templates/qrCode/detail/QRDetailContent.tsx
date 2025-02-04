@@ -1,7 +1,7 @@
-import type { OrderInfoDTO } from '@type/api';
+import type { OrderInfoRes } from '@type/responses/payment';
 
 interface QRDetailCardProps {
-  orderData?: OrderInfoDTO;
+  orderData?: OrderInfoRes;
 }
 const QRDetailContent = ({ orderData }: QRDetailCardProps) => {
   return (

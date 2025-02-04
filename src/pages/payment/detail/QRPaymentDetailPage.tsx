@@ -3,14 +3,10 @@ import QRDetailContent from '@ui/templates/qrCode/detail/QRDetailContent';
 import { LoadingSpinner } from '@ui/components/loading/LoadingSpinner';
 import Button from '@ui/components/button/Button';
 import { useLocationState } from '@hooks/useLocationState';
-// import { useEffect } from 'react';
-// import { ROUTES } from '@constants/routes';
+
 import { useOrderInfo } from '@hooks/queries/usePayments';
 
 const QRPaymentDetailPage = () => {
-  // const navigate = useNavigate();
-  // const { openDialog, closeModal } = useModal();
-
   const { state } = useLocationState<{
     token: string;
     expiredAt: number;

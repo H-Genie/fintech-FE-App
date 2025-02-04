@@ -1,5 +1,5 @@
 import { API_ENDPOINTS } from '@constants/apiEndpoints';
-import { HistoryPaymentMethod, HistoryPaymentStatus } from '@type/api';
+import { HistoryPaymentMethod, HistoryPaymentStatus } from '@constants/payment';
 import { http, HttpResponse } from 'msw';
 
 export const paymentHandler = [

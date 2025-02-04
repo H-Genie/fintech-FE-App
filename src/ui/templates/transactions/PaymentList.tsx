@@ -1,6 +1,6 @@
 import { ROUTES } from '@constants/routes';
 import { useTransactionList } from '@hooks/queries/usePayments';
-import { converDateFormat, convertCurrencyFormat } from '@lib/fomatter';
+import { convertDateFormat, convertCurrencyFormat } from '@lib/formatter';
 import ErrorComponent from '@ui/components/error/ErrorComponent';
 import LoadingAnimation from '@ui/components/loading/LoadingAnimation';
 import { useNavigate, generatePath } from 'react-router-dom';
@@ -19,7 +19,7 @@ const PaymentList = () => {
 
   return (
     <ul>
-      {data.transactions.map((list) => (
+      {data.transactions?.map((list) => (
         <li
           key={list.id}
           className='w-full h-16 border-b border-gray-200 flex justify-between items-center px-4 mb-4 cursor-pointer'
@@ -37,7 +37,7 @@ const PaymentList = () => {
             <p>{list.store}</p>
           </div>
           <div className='text-gray-400'>
-            {converDateFormat(list.approvedAt)}
+            {convertDateFormat(list.approvedAt)}
           </div>
         </li>
       ))}

@@ -2,7 +2,7 @@ import { authService } from '@api/services/auth';
 import { ROUTES } from '@constants/routes';
 import useModal from '@hooks/useModal';
 import { useMutation } from '@tanstack/react-query';
-import type { LoginDTO } from '@type/api';
+import type { LoginReq } from '@type/requests/auth';
 import Button from '@ui/components/button/Button';
 import PageLayout from '@ui/layouts/PageLayout';
 import { useState } from 'react';
@@ -11,7 +11,7 @@ import { Link, useNavigate } from 'react-router-dom';
 export const LoginPage = () => {
   const { openDialog } = useModal();
   const [isShow, setIsShow] = useState<boolean>(false);
-  const [loginData, setLoginData] = useState<LoginDTO>({
+  const [loginData, setLoginData] = useState<LoginReq>({
     email: 'admin@admin.com',
     password: '1234',
   });

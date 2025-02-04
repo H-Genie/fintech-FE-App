@@ -1,6 +1,6 @@
-import { useHistoryDetail } from '@hooks/queries/usePayments';
-import { convertCurrencyFormat } from '@lib/fomatter';
-import { HistoryPaymentStatus } from '@type/api';
+import { TRANSACTION_STATUS } from '@constants/payment';
+import { useTransactionDetail } from '@hooks/queries/usePayments';
+import { convertCurrencyFormat } from '@lib/formatter';
 import Button from '@ui/components/button/Button';
 import ErrorComponent from '@ui/components/error/ErrorComponent';
 import LoadingAnimation from '@ui/components/loading/LoadingAnimation';
@@ -8,24 +8,13 @@ import DetailRow from '@ui/components/transactionDetailPage/DetailRow';
 import PaymentResultDisplay from '@ui/components/transactionDetailPage/PaymentResultDisplay';
 import TaxRow from '@ui/components/transactionDetailPage/TaxRow';
 import PageLayout from '@ui/layouts/PageLayout';
-import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const TransactionDetailPage = () => {
   const location = useLocation();
   const historyId = location.pathname.split('/').pop() || '';
 
-  const { data, isLoading, isError } = useHistoryDetail(historyId);
-
-  const taxValue = useMemo(() => {
-    if (!data) {
-      return { price: 0, tax: 0 };
-    } else {
-      const price = Math.round(data.amount / 1.1);
-      const tax = Math.round(data.amount - price);
-      return { price, tax };
-    }
-  }, [data]);
+  const { data, isLoading, isError } = useTransactionDetail(historyId);
 
   if (isLoading) {
     return <LoadingAnimation />;
@@ -38,39 +27,39 @@ const TransactionDetailPage = () => {
   return (
     <PageLayout hasNav className='flex flex-col justify-center py-8'>
       <div className='mt-8'>
-        <PaymentResultDisplay data={data.paymentStatus} />
+        <PaymentResultDisplay data={data.transactionStatus} />
 
         <h2
-          className={`text-center mt-4 font-bold text-3xl ${data.paymentStatus === HistoryPaymentStatus.COMPLETED ? 'text-black' : 'text-red-500'}`}
+          className={`text-center mt-4 font-bold text-3xl ${data.transactionStatus === TRANSACTION_STATUS.APPROVED ? 'text-black' : 'text-red-500'}`}
         >
-          {convertCurrencyFormat(data.amount)} KRW
+          {convertCurrencyFormat(data.totalAmount)} KRW
         </h2>
       </div>
       <hr className='my-8 border-b border-gray-200 w-full' />
       <div>
-        <DetailRow label='거래 번호' value={data.historyId} />
+        <DetailRow label='거래 번호' value={data.id} />
         <DetailRow
           label={
-            data.paymentStatus === HistoryPaymentStatus.COMPLETED
+            data.transactionStatus === TRANSACTION_STATUS.APPROVED
               ? '결제 일시'
               : '취소 일시'
           }
           value={
-            data.paymentStatus === HistoryPaymentStatus.COMPLETED
-              ? data.createdAt
-              : data.canceledAt
+            data.transactionStatus === TRANSACTION_STATUS.APPROVED
+              ? data.approvedAt
+              : data.cancelledAt
           }
         />
-        <DetailRow label='카드번호' value={data.cardInfo.cardNumber} />
+        <DetailRow label='카드번호' value={data.cardNumber} />
         <DetailRow label='상점명' value={data.store} />
       </div>
       <hr className='mb-8 border-b-2 border-dashed border-gray-200 w-full' />
       <div>
-        <TaxRow label='금액' value={taxValue.price} />
+        <TaxRow label='공급가액' value={data.supplyAmount} />
 
         <div role='separator' className='mb-8' />
 
-        <TaxRow label='부가세' value={taxValue.tax} />
+        <TaxRow label='부가세' value={data.vatAmount} />
       </div>
 
       <Button

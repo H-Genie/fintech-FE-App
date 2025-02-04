@@ -1,4 +1,4 @@
-import { convertCurrencyFormat } from '@lib/fomatter';
+import { convertCurrencyFormat } from '@lib/formatter';
 
 const TaxRow = ({ label, value }: { label: string; value: number }) => {
   return (
