@@ -3,15 +3,22 @@ import { ROUTES } from '@constants/routes';
 import PageLayout from '@ui/layouts/PageLayout';
 import { QRScanWidget } from '@ui/templates/qrCode/QRScanWidget';
 import { parseQueryString } from '@lib/parseQueryString';
+import { DUMMY_API_CONFIG } from '@mocks/config/dummy';
 
 const QRPage = () => {
   const navigate = useNavigate();
 
   const handleScanSuccess = (resultUrl: string) => {
     const result = parseQueryString(resultUrl);
+    console.log('result', result);
+    // 임시 데이터
+    const result_dummy = {
+      token: DUMMY_API_CONFIG.ORDER_TOKEN,
+      expiredAt: 171232323232,
+    };
     const state = {
-      token: result.token,
-      expiredAt: result.expiredAt,
+      token: result_dummy.token,
+      expiredAt: result_dummy.expiredAt,
     };
 
     if (state) {

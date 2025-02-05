@@ -79,3 +79,17 @@ export type TransactionDetailRes = {
   cancelledAt?: string;
   transactionStatus: TransactionStatus;
 };
+
+/**
+ * 주문 정보 JWT 파싱 타입
+ * @param order_name - 주문 이름
+ * @param amount - 주문 금액
+ * @param merchant_name - 매장 이름
+ * @param iat - 토큰 발급 시간
+ */
+export type OrderInfoJwtRes = {
+  order_name: string;
+  amount: number;
+  merchant_name: string;
+  iat: number;
+};
