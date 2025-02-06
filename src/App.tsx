@@ -3,13 +3,14 @@ import { RouterProvider } from 'react-router-dom';
 import { router } from './router';
 import ModalProvider from './providers/modalProvider';
 
-//MSW를 개발 환경에서만 시작하도록 설정합니다.
-// if (process.env.NODE_ENV === 'development') {
-//   const { worker } = await import('@mocks/browser');
-//   worker.start();
-// }
-const { worker } = await import('@mocks/browser');
-worker.start();
+// MSW 초기화를 위한 함수
+const initMSW = async () => {
+  const { worker } = await import('@mocks/browser');
+  await worker.start();
+};
+
+// MSW 초기화 실행
+initMSW();
 
 const queryClient = new QueryClient();
 function App() {
