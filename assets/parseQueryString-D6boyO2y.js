@@ -1,0 +1,1 @@
+const n=t=>{try{const e=new URL(t),r=new URLSearchParams(e.search);return{token:r.get("token")||"",expiredAt:Number(r.get("expiredAt"))||0}}catch(e){return console.error("Invalid URL:",e),{token:"",expiredAt:0}}};export{n as p};

@@ -1,0 +1,1 @@
+import{j as e,P as s}from"./index-CJfzJY_1.js";const o=()=>e.jsxs(s,{hasNav:!0,className:"flex flex-col items-center justify-center ",children:[e.jsx("img",{src:"/logo.png",className:"w-24",alt:"Logo"}),e.jsx("h2",{className:"text-3xl mt-8 mb-8 font-black text-[#18A0FB]",children:"To be continued"}),e.jsx("p",{onClick:()=>window.history.back(),children:"돌아가기"})]});export{o as U};
