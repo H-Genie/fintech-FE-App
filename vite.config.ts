@@ -25,9 +25,4 @@ export default defineConfig({
       process.env.NODE_ENV || 'development',
     ),
   },
-
-  base: '/', // 루트 경로
-  build: {
-    outDir: 'dist', // Vercel에서 기본으로 인식하는 폴더
-  },
 });
