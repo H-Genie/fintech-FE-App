@@ -47,7 +47,7 @@ const QRDetailContent = ({ orderData }: QRDetailCardProps) => {
     if (connected) {
       disconnect();
     }
-    navigate('transactions/history-001');
+    navigate('/transactions/history-001');
   };
 
   return (
@@ -61,7 +61,7 @@ const QRDetailContent = ({ orderData }: QRDetailCardProps) => {
             onClick={tempHandler}
             className='mt-4 bg-blue-500 text-white hover:bg-blue-600 transition duration-200'
           >
-            돌아가기
+            확인
           </Button>
         </div>
       )}
