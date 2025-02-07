@@ -8,6 +8,7 @@ import { useNavigate, generatePath } from 'react-router-dom';
 const PaymentList = () => {
   const navigate = useNavigate();
   const { data, isLoading, isError } = useTransactionList();
+  console.log(data);
 
   if (isLoading) {
     return <LoadingAnimation />;
@@ -18,14 +19,14 @@ const PaymentList = () => {
   }
 
   return (
-    <ul className='pt-6 pb-24'>
-      {data.transactions?.map((list) => (
+    <ul>
+      {data.items?.map((list) => (
         <li
           key={list.id}
           className='w-full h-16 border-b border-gray-200 flex justify-between items-center px-4 mb-4 cursor-pointer'
           onClick={() => {
             const path = generatePath(ROUTES.TRANSACTIONS.DETAIL, {
-              id: list.id.toString(),
+              id: list.historyId.toString(),
             });
             navigate(path);
           }}
@@ -37,7 +38,7 @@ const PaymentList = () => {
             <p>{list.store}</p>
           </div>
           <div className='text-gray-400'>
-            {convertDateFormat(list.approvedAt)}
+            {convertDateFormat(list.createdAt)}
           </div>
         </li>
       ))}

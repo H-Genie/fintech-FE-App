@@ -32,6 +32,8 @@ export type TransactionsRes = {
   approvedAt: string;
   cancelledAt?: string;
   transactionStatus: TransactionStatus;
+  historyId: string;
+  createdAt: string;
 };
 
 /**
@@ -45,6 +47,7 @@ export type TransactionsRes = {
  */
 export type TransactionsPageRes = {
   transactions: TransactionsRes[];
+  items: TransactionsRes[];
   totalAmount: number;
   page: number;
   size: number;
@@ -78,6 +81,7 @@ export type TransactionDetailRes = {
   approvedAt: string;
   cancelledAt?: string;
   transactionStatus: TransactionStatus;
+  amount: number;
 };
 
 /**

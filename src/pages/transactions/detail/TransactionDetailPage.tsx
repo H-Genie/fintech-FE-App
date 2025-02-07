@@ -15,6 +15,7 @@ const TransactionDetailPage = () => {
   const historyId = location.pathname.split('/').pop() || '';
 
   const { data, isLoading, isError } = useTransactionDetail(historyId);
+  console.log(data);
 
   if (isLoading) {
     return <LoadingAnimation />;
@@ -32,7 +33,7 @@ const TransactionDetailPage = () => {
         <h2
           className={`text-center mt-4 font-bold text-3xl ${data.transactionStatus === TRANSACTION_STATUS.APPROVED ? 'text-black' : 'text-red-500'}`}
         >
-          {convertCurrencyFormat(data.totalAmount)} KRW
+          {convertCurrencyFormat(data.amount)} KRW
         </h2>
       </div>
       <hr className='my-8 border-b border-gray-200 w-full' />
