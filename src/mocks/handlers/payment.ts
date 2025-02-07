@@ -25,13 +25,13 @@ export const paymentHandler = [
         items: [
           {
             historyId: 'history-001',
-            store: '테스트 가맹점 A',
+            store: 'developer shop',
             orderId: 'order-001',
-            orderName: '테스트 상품 A외 2건',
+            orderName: 'nextjs 1',
             paymentStatus: HistoryPaymentStatus.COMPLETED,
             paymentMethod: HistoryPaymentMethod.CARD,
-            amount: 15000,
-            createdAt: '2024-03-20T09:00:00',
+            amount: 50000,
+            createdAt: String(new Date()),
           },
           {
             historyId: 'history-002',
@@ -56,17 +56,17 @@ export const paymentHandler = [
       data: {
         historyId: 'history-001',
         orderId: 'order-001',
-        orderName: '테스트 상품 A외 2건',
+        orderName: 'developer shop',
         paymentStatus: HistoryPaymentStatus.COMPLETED,
         paymentMethod: HistoryPaymentMethod.CARD,
-        amount: 15000,
+        amount: 50000,
         cardInfo: {
           cardCompany: '신한카드',
           cardNumber: '123456******7890',
           installmentPeriod: 0,
         },
-        store: '테스트 가맹점',
-        createdAt: '2024-03-20T09:00:00',
+        store: 'developer shop',
+        createdAt: String(new Date().toLocaleDateString('ko')),
         canceledAt: null,
       },
     });

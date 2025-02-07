@@ -43,6 +43,13 @@ const QRDetailContent = ({ orderData }: QRDetailCardProps) => {
     navigate(ROUTES.PAYMENT.QR);
   };
 
+  const tempHandler = () => {
+    if (connected) {
+      disconnect();
+    }
+    navigate('transactions/history-001');
+  };
+
   return (
     <>
       {messages && (
@@ -51,7 +58,7 @@ const QRDetailContent = ({ orderData }: QRDetailCardProps) => {
             결제가 완료되었습니다.
           </div>
           <Button
-            onClick={handleCancel}
+            onClick={tempHandler}
             className='mt-4 bg-blue-500 text-white hover:bg-blue-600 transition duration-200'
           >
             돌아가기

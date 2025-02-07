@@ -1,4 +1,8 @@
-import type { InstallmentType, TransactionStatus } from '@type/payment';
+import type {
+  HistoryPaymentMethod,
+  HistoryPaymentStatus,
+} from '@constants/payment';
+import type { TransactionStatus } from '@type/payment';
 
 /**
  * 주문 정보 응답 타입
@@ -57,31 +61,32 @@ export type TransactionsPageRes = {
 
 /**
  * 결제 내역 상세 응답 타입
- * @param id - 고유 ID
- * @param store - 매장 이름
+ * @param historyId - 결제 내역 ID
+ * @param orderId - 주문 ID
  * @param orderName - 주문 이름
- * @param supplyAmount - 공급 금액
- * @param vatAmount - 부가세 금액
- * @param totalAmount - 총 금액
- * @param cardNumber - 카드 번호
- * @param paymentType - 결제 유형 (일시불, 할부)
- * @param approvedAt - 승인 일시
- * @param cancelledAt - 취소 일시
- * @param transactionStatus - 결제 승인 상태
+ * @param paymentStatus - 결제 상태
+ * @param paymentMethod - 결제 수단
+ * @param amount - 결제 금액
+ * @param cardInfo - 카드 정보
+ * @param store - 매장 이름
+ * @param createdAt - 생성 일시
+ * @param canceledAt - 취소 일시
  */
 export type TransactionDetailRes = {
-  id: number;
-  store: string;
+  historyId: string;
+  orderId: string;
   orderName: string;
-  supplyAmount: number;
-  vatAmount: number;
-  totalAmount: number;
-  cardNumber: string;
-  installmentType: InstallmentType;
-  approvedAt: string;
-  cancelledAt?: string;
-  transactionStatus: TransactionStatus;
+  paymentStatus: HistoryPaymentStatus;
+  paymentMethod: HistoryPaymentMethod;
   amount: number;
+  cardInfo: {
+    cardCompany: string;
+    cardNumber: string;
+    installmentPeriod: number;
+  };
+  store: string;
+  createdAt: string;
+  canceledAt?: string;
 };
 
 /**

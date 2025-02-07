@@ -8,7 +8,6 @@ import { useNavigate, generatePath } from 'react-router-dom';
 const PaymentList = () => {
   const navigate = useNavigate();
   const { data, isLoading, isError } = useTransactionList();
-  console.log(data);
 
   if (isLoading) {
     return <LoadingAnimation />;
